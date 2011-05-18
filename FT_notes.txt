@@ -1,0 +1,21 @@
+##############################################
+# Notes/Ideas on fourier transform of an image
+##############################################
+[1] F(kx,ky) = pow(2*PI,-.5)*sum(sum(img(y,x)*exp(-i*(k_x*x +k_y*y)),
+				x, 0, numCols),y,0,numRows)
+		-	For new image(k_y,kx)
+
+[2] F(k) = R(k) + i*I(k)
+		-	R(k) = pow(2*PI,-.5)*sum(sum(img(y,x)*cos(k_x*x + k_y*y),
+				x, 0, numCols), y, 0, numRows)
+		-	I(k) = -1*pow(2*PI,-.5)*sum(sum(img(y,x)*sin(k_x*x + k_y*y),
+				x, 0, numCols), y, 0, numRows)
+
+[3] Produce 4 images
+		-	Real Part
+		-	Imaginary Part
+		-	Magnitude
+		-	Phase
+
+[4]	Add this function to matrixmath04
+		-	Return pointer to array of the four images
