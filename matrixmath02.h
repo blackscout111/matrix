@@ -316,8 +316,8 @@ const type mean2d(const matrix<type> mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the variance of the values of the elements in the
 // rows of 'mat'.
-// *	If 'bias' = 0 (default) then the population variance is calculated
-// *	If 'bias' = 1 then the sample variance is calculated
+// *	If 'bias' = 0 then the population variance is calculated
+// *	If 'bias' = 1 (default) then the sample variance is calculated
 template <class type>
 const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 {
@@ -371,7 +371,25 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 			pvari(i,j) *= pvari(i,j);
 			rsum += pvari(i,j);
 		}
-		variance(i,0) = (type)((double)rsum/(double)(pvari.width() - bias));
+		if (pvari.width() - bias != 0)
+		{
+			variance(i,0) = (type)((double)rsum/(double)(pvari.width() - bias));
+		}
+		else
+		{
+			// Display error message and terminates the program
+			cout	<< endl
+					<< "matrixmath.h: In function "
+					<< "'template <class type>const type vari(const matrix<type> "
+					<< "mat, unsigned char bias= 1)'"
+					<< endl
+					<< "matrixmath.h: error: "
+					<< "divide by 0!"
+					<< endl << endl;
+
+			// Exits program returning the value '-1'
+			exit(-1);
+		}
 	}
 
 	return variance;
@@ -380,8 +398,8 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 
 //______________________________________________________________________________
 // Returns the population variance of the values of all the elements in 'mat'
-// *	If 'bias' = 0 (default) then the population variance is calculated
-// *	If 'bias' = 1 then the sample variance is calculated
+// *	If 'bias' = 0 then the population variance is calculated
+// *	If 'bias' = 1 (default) then the sample variance is calculated
 template <class type>
 const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 {
@@ -429,9 +447,28 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 		}
 	}
 
-	return (type)(	(double)variance/
-					(double)((mat.width() * mat.height()) - (_DIM)bias)
-					);
+	if ((double)((mat.width() * mat.height()) - (_DIM)bias) != 0)
+	{
+		return (type)(	(double)variance/
+						(double)((mat.width() * mat.height()) - (_DIM)bias)
+						);
+	}
+	else
+	{
+		// Display error message and terminates the program
+		cout	<< endl
+				<< "matrixmath.h: In function "
+				<< "'template <class type>const type vari2d(const matrix<type> "
+				<< "mat, unsigned char bias= 1)'"
+				<< endl
+				<< "matrixmath.h: error: "
+				<< "divide by 0!"
+				<< endl << endl;
+
+		// Exits program returning the value '-1'
+		exit(-1);
+	}
+
 }
 
 
