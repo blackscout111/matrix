@@ -122,9 +122,9 @@ matrix<type>::matrix(const matrix<type>& other)
 	elem = new type [numRows * numCols];
 
 	// Copies data from other into element array
-	for (int i = 0; i < numRows; i++)
+	for (_DIM i = 0; i < numRows; i++)
 	{
-		for (int j = 0; j < numCols; j++)
+		for (_DIM j = 0; j < numCols; j++)
 		{
 			(*this)(i,j) = other(i,j);
 		}
@@ -482,9 +482,9 @@ matrix<type>& matrix<type>::
 		elem = new type [numRows * numCols];
 
 		// Copies data from other into element array
-		for (int i = 0; i < numRows; i++)
+		for (_DIM i = 0; i < numRows; i++)
 		{
-			for (int j = 0; j < numCols; j++)
+			for (_DIM j = 0; j < numCols; j++)
 			{
 				(*this)(i,j) = other(i,j);
 			}

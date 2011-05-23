@@ -512,7 +512,7 @@ const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
 	stdeviation = vari(mat, bias);
 	for (_DIM i = 0; i < mat.height(); i++)
 	{
-		stdeviation(i,0) = sqrt((double)stdeviation(i,0));
+		stdeviation(i,0) = (type)sqrt((double)stdeviation(i,0));
 	}
 
 	return stdeviation;
@@ -555,7 +555,7 @@ const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
 	}
 
 	// Calculate standard deviation (the square root of the variance)
-	return sqrt((double)vari2d(mat, bias));
+	return (type)sqrt((double)vari2d(mat, bias));
 }
 
 
