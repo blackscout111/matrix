@@ -512,7 +512,7 @@ const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
 	stdeviation = vari(mat, bias);
 	for (_DIM i = 0; i < mat.height(); i++)
 	{
-		stdeviation(i,0) = sqrt(stdeviation(i,0));
+		stdeviation(i,0) = sqrt((double)stdeviation(i,0));
 	}
 
 	return stdeviation;
@@ -555,12 +555,15 @@ const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
 	}
 
 	// Calculate standard deviation (the square root of the variance)
-	return sqrt(vari2d(mat, bias));
+	return sqrt((double)vari2d(mat, bias));
 }
 
 
 //______________________________________________________________________________
 // Returns the determinant of the matrix 'mat'
+// * Uses method of cofactors to calulate determinent
+// * If dim = 1 then will calculate cofactors along row 'idx'
+// * If dim = 2 then will calculate cofactors along column 'idx'
 template <class type>
 const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 {

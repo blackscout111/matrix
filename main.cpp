@@ -8,9 +8,9 @@ using namespace std;
 
 void dispNumMat(const matrix<int>& mat)
 {
-	for (int i = 0; i < mat.height(); i++)
+	for (_DIM i = 0; i < mat.height(); i++)
 	{
-		for (int j = 0; j < mat.width(); j++)
+		for (_DIM j = 0; j < mat.width(); j++)
 		{
 			cout << setw(3) << mat(i,j);
 		}
@@ -23,9 +23,9 @@ void dispNumMat(const matrix<int>& mat)
 
 void dispNumMat(const matrix<float>& mat)
 {
-	for (int i = 0; i < mat.height(); i++)
+	for (_DIM i = 0; i < mat.height(); i++)
 	{
-		for (int j = 0; j < mat.width(); j++)
+		for (_DIM j = 0; j < mat.width(); j++)
 		{
 			cout << setw(4) << mat(i,j);
 		}
@@ -38,9 +38,9 @@ void dispNumMat(const matrix<float>& mat)
 
 void dispNumMat(const matrix<double>& mat)
 {
-	for (int i = 0; i < mat.height(); i++)
+	for (_DIM i = 0; i < mat.height(); i++)
 	{
-		for (int j = 0; j < mat.width(); j++)
+		for (_DIM j = 0; j < mat.width(); j++)
 		{
 			cout << setw(4) << mat(i,j);
 		}
@@ -53,9 +53,9 @@ void dispNumMat(const matrix<double>& mat)
 
 void dispStrMat(const matrix<string>& strmat)
 {
-	for (int i = 0; i < strmat.height(); i++)
+	for (_DIM i = 0; i < strmat.height(); i++)
 	{
-		for (int j = 0; j < strmat.width(); j++)
+		for (_DIM j = 0; j < strmat.width(); j++)
 		{
 			cout << setw(15) << strmat(i,j);
 		}
@@ -78,9 +78,9 @@ int main()
 
 	// Fill a
 	int count = 0;
-	for (int i = 0; i < a.height(); i++)
+	for (_DIM i = 0; i < a.height(); i++)
 	{
-		for (int j = 0; j < a.width(); j++)
+		for (_DIM j = 0; j < a.width(); j++)
 		{
 			a(i,j) = count;
 			count++;
@@ -270,7 +270,7 @@ int main()
 	dispNumMat(fltMat3x3);
 	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3));
 	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3,2,1));
-	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3,3,1));
+	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3,2,2));
 	////////////////////////////////////////////////////////////////////////////
 
 	return 0;
