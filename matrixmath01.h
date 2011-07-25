@@ -45,7 +45,7 @@ matrix<type>& operator += (matrix<type>& a, const matrix<type>& b)
 	else
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'matrix<type>"
 				<< "matrix<type>::operator"
@@ -55,8 +55,8 @@ matrix<type>& operator += (matrix<type>& a, const matrix<type>& b)
 				<< "Dimension mis-match!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 
@@ -104,7 +104,7 @@ matrix<type>& operator -= (matrix<type>& a, const matrix<type>& b)
 	else
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'matrix<type>"
 				<< "matrix<type>::operator"
@@ -114,8 +114,8 @@ matrix<type>& operator -= (matrix<type>& a, const matrix<type>& b)
 				<< "Dimension mis-match!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 
@@ -238,7 +238,7 @@ const matrix<type> operator * (const matrix<type>& a, const matrix<type>& b)
 	else
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'matrix<type>"
 				<< "matrix<type>::operator"
@@ -248,8 +248,8 @@ const matrix<type> operator * (const matrix<type>& a, const matrix<type>& b)
 				<< "Dimension mis-match!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 

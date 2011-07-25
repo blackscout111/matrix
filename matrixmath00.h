@@ -72,7 +72,7 @@ void continueIfMathType(matrix<type> mat)
 	else
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type> void continueIfMathType(matrix<type>"
 				<< " mat)'"
@@ -81,8 +81,8 @@ void continueIfMathType(matrix<type> mat)
 				<< "This type of matrix can't have math done with it!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 

@@ -153,7 +153,7 @@ const type& matrix<type>::operator ()(_DIM row,
 	else
 	{
 		// Display error message and exit the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrix.h: In member function "
 				<< "'template <class type>matrix<type>&"
 				<< "matrix<type>::operator"
@@ -165,8 +165,8 @@ const type& matrix<type>::operator ()(_DIM row,
 				<< ") is out of bounds!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 
@@ -182,7 +182,7 @@ type& matrix<type>::operator ()(_DIM row, _DIM col)
 	else
 	{
 		// Display error message and exit the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrix.h: In member function "
 				<< "'template <class type>matrix<type>&"
 				<< "matrix<type>::operator"
@@ -194,8 +194,8 @@ type& matrix<type>::operator ()(_DIM row, _DIM col)
 				<< ") is out of bounds!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 
@@ -235,7 +235,7 @@ matrix<type> matrix<type>::operator ()(_DIM firstRow,
 		else
 		{
 			// Display error message and exit the program
-			cout	<< endl
+			cerr	<< endl
 					<< "matrix.h: In member function "
 					<< "'template <class type>matrix<type>&"
 					<< "matrix<type>::operator"
@@ -249,14 +249,14 @@ matrix<type> matrix<type>::operator ()(_DIM firstRow,
 					<< ") starting index must be less than ending index!"
 					<< endl << endl;
 
-			// Exits program returning the value '-1'
-			exit(-1);
+			// Exits program
+			std::exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		// Display error message and exit the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrix.h: In member function "
 				<< "'template <class type>matrix<type>&"
 				<< "matrix<type>::operator"
@@ -270,8 +270,8 @@ matrix<type> matrix<type>::operator ()(_DIM firstRow,
 				<< ") is out of bounds!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 }
 
@@ -335,7 +335,7 @@ void matrix<type>::crop(_DIM minrow,
 	if ((minrow > maxrow) || (mincol > maxcol))
 	{
 		// Display error message and exit the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrix.h: In member function "
 				<< "'template <class type>void"
 				<< "matrix<type>::crop(_DIM minrow, "
@@ -346,8 +346,8 @@ void matrix<type>::crop(_DIM minrow,
 				<< "Max must be greater than min!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// New dimensions

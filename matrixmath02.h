@@ -52,7 +52,7 @@ const type trace(const matrix<type> mat)
 	if (mat.height() != mat.width())
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type> const type trace(const matrix<type> "
 				<< "mat)'"
@@ -61,8 +61,8 @@ const type trace(const matrix<type> mat)
 				<< "Can only take the trace of a square matrix!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// Adds up the values along the main diagonal
@@ -337,7 +337,7 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 	if ((bias != 0) && (bias != 1))
 	{
 		// Display error message and terminates the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type vari(const matrix<type> "
 				<< "mat, unsigned char bias= 1)'"
@@ -348,8 +348,8 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 				<< "bias can be 0 or 1"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// Calculate partial variances
@@ -378,7 +378,7 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 		else
 		{
 			// Display error message and terminates the program
-			cout	<< endl
+			cerr	<< endl
 					<< "matrixmath.h: In function "
 					<< "'template <class type>const type vari(const matrix<type> "
 					<< "mat, unsigned char bias= 1)'"
@@ -387,8 +387,8 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 					<< "divide by 0!"
 					<< endl << endl;
 
-			// Exits program returning the value '-1'
-			exit(-1);
+			// Exits program
+			std::exit(EXIT_FAILURE);
 		}
 	}
 
@@ -415,7 +415,7 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 	if ((bias != 0) && (bias != 1))
 	{
 		// Display error message and terminates the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type vari2d(const matrix<type> "
 				<< "mat, unsigned char bias= 1)'"
@@ -426,8 +426,8 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 				<< "bias can be 0 or 1"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// Calculate the total variance
@@ -456,7 +456,7 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 	else
 	{
 		// Display error message and terminates the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type vari2d(const matrix<type> "
 				<< "mat, unsigned char bias= 1)'"
@@ -465,8 +465,8 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 				<< "divide by 0!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 }
@@ -493,7 +493,7 @@ const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
 	if ((bias != 0) && (bias != 1))
 	{
 		// Display error message and terminates the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type stdev(const matrix<type> "
 				<< "mat, unsigned char bias= 1)'"
@@ -504,8 +504,8 @@ const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
 				<< "bias can be 0 or 1"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// Calculate standard deviations (the square root of the variance)
@@ -539,7 +539,7 @@ const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
 	if ((bias != 0) && (bias != 1))
 	{
 		// Display error message and terminates the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type stdev2d(const matrix<type>"
 				<< " mat, unsigned char bias= 1)'"
@@ -550,8 +550,8 @@ const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
 				<< "bias can be 0 or 1"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// Calculate standard deviation (the square root of the variance)
@@ -575,7 +575,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 	if (mat.height() != mat.width())
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type det(const matrix<type> mat"
 				<< ", unsigned char dim= 1, _DIM idx= 0)'"
@@ -584,8 +584,8 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 				<< "Can only take the determinant of a square matrix!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 
 	// Value of the determinant 'sum' and the sign of of the minors
@@ -595,7 +595,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 	if (mat.height() == 1)
 	{
 		// Display error message and terminate the program
-		cout	<< endl
+		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type det(const matrix<type> mat"
 				<< ", unsigned char dim= 1, _DIM idx= 0)'"
@@ -604,8 +604,8 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 				<< "Cannot take the determinant of a 1x1 matrix!"
 				<< endl << endl;
 
-		// Exits program returning the value '-1'
-		exit(-1);
+		// Exits program
+		std::exit(EXIT_FAILURE);
 	}
 	// If 2x2 matrix then take the determinant
 	else if (mat.height() == 2)
@@ -700,7 +700,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 			// Calculate cofactors along row 0
 			default: 
 				// Display error message and terminates the program
-				cout	<< endl
+				cerr	<< endl
 						<< "matrixmath.h: In function "
 						<< "'template <class type>const type det(const "
 						<< "matrix<type> mat, "
@@ -712,8 +712,8 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 						<< "dim can be 1 or 2"
 						<< endl << endl;
 
-				// Exits program returning the value '-1'
-				exit(-1);
+				// Exits program
+				std::exit(EXIT_FAILURE);
 
 				break;
 			////////////////////////////////////////////////////////////////////
