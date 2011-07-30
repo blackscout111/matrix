@@ -11,6 +11,9 @@
 
 using namespace std;
 
+namespace matrixmath
+{
+
 /*******************************************************************************
 * This file normally included from matrixmath.h
 *
@@ -94,6 +97,6 @@ const matrix<type> zeros(_DIM height, _DIM width)
 template <class type>
 const matrix<type> zeros(_DIM dim=1){return zeros<type>(dim,dim);}
 
-
+};// namespace matrixmath
 
 #endif

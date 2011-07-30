@@ -10,6 +10,11 @@
 
 using namespace std;
 
+
+namespace matrixmath
+{
+
+
 /*******************************************************************************
 * This file normally included from matrixmath.h
 *
@@ -86,6 +91,6 @@ void continueIfMathType(matrix<type> mat)
 	}
 }
 
-
+}; // namespace matrixmath
 
 #endif

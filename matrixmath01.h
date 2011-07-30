@@ -10,6 +10,9 @@
 
 using namespace std;
 
+namespace matrixmath
+{
+
 /*******************************************************************************
 * This file normally included from matrixmat.h
 *
@@ -267,6 +270,6 @@ matrix<type>& operator *= (matrix<type>& a, const matrix<type>& b)
 	return a;
 }
 
-
+};// namespace matrixmath
 
 #endif

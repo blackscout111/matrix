@@ -12,6 +12,9 @@
 
 using namespace std;
 
+namespace matrixmath
+{
+
 /*******************************************************************************
 * This file normally included from matrixmath.h
 *
@@ -732,6 +735,6 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 // Reduces the matrix 'mat' to its reduced row-echelon form
 
 
-
+};// namespace matrixmath
 
 #endif
