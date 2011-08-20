@@ -91,6 +91,6 @@ void continueIfMathType(matrix<type> mat)
 	}
 }
 
-}; // namespace matrixmath
+} // namespace matrixmath
 
 #endif

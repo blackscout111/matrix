@@ -735,6 +735,6 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 // Reduces the matrix 'mat' to its reduced row-echelon form
 
 
-};// namespace matrixmath
+} // namespace matrixmath
 
 #endif

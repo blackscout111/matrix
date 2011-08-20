@@ -23,6 +23,6 @@ namespace matrixmath
 //______________________________________________________________________________
 
 
-};// namespace matrixmath
+} // namespace matrixmath
 
 #endif
