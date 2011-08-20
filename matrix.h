@@ -5,10 +5,9 @@
 #include <cstdio>
 #include <cstdlib>
 
-// The variable type of the dimensions of a matrix
-typedef unsigned int _DIM;
 
 using namespace std;
+
 
 // matrix is a 2-D array with elements of type 'type'.
 template <class type>
@@ -17,13 +16,13 @@ class matrix
 	public:
 		// Default constructor
 		// (Allocates memory for matrix given numRows and numCols)
-		matrix(_DIM height = 1, _DIM width = 1);
+		matrix(size_t height = 1, size_t width = 1);
 
 		// Returns numRows
-		_DIM width() const;
+		size_t width() const;
 
 		// Returns numCols
-		_DIM height() const;
+		size_t height() const;
 
 		// Copy constructor
 		matrix(const matrix<type>& other);
@@ -32,47 +31,47 @@ class matrix
 		~matrix();
 
 		// Overloads the () operator
-		const type& operator ()(_DIM row, _DIM col) const;
-		type& operator ()(_DIM row, _DIM col);
-		matrix<type> operator ()(_DIM firstRow,
-								 _DIM lastRow,
-								 _DIM firstCol,
-								 _DIM lastCol);
+		const type& operator ()(size_t row, size_t col) const;
+		type& operator ()(size_t row, size_t col);
+		matrix<type> operator ()(size_t firstRow,
+								 size_t lastRow,
+								 size_t firstCol,
+								 size_t lastCol);
 
 		// Sets all entries to "val"
 		void fill(const type& val);
 
 		// Swaps row 'i' with row 'j'
-		void rowSwap(_DIM i, _DIM j);
+		void rowSwap(size_t i, size_t j);
 
 		// Swaps column 'i' with row 'j'
-		void colSwap(_DIM i, _DIM j);
+		void colSwap(size_t i, size_t j);
 		
 		// Crops the matrix
-		void crop(_DIM minrow,
-			  	  _DIM maxrow,
-			  	  _DIM mincol,
-			  	  _DIM maxcol);
+		void crop(size_t minrow,
+			  	  size_t maxrow,
+			  	  size_t mincol,
+			  	  size_t maxcol);
 
 		// Increases the size of the matrix
-		void grow(_DIM above,
-			  	  _DIM below,
-			  	  _DIM left,
-			  	  _DIM right);
+		void grow(size_t above,
+			  	  size_t below,
+			  	  size_t left,
+			  	  size_t right);
 
 		// Increases the size of the matrix
 		// (New spaces initialized to "val")
-		void grow(_DIM above,
-			  	  _DIM below,
-			  	  _DIM left,
-			  	  _DIM right,
+		void grow(size_t above,
+			  	  size_t below,
+			  	  size_t left,
+			  	  size_t right,
 			  	  type val);
 
 		// Overloads the = operator
 		matrix<type>& operator =(const matrix<type>& other);
 
 	protected:
-		_DIM	numRows,	// # of rows of elem
+		size_t	numRows,	// # of rows of elem
 				numCols;	// # of columns of elem
 
 		type	*elem;		// The elements matrix
@@ -83,7 +82,7 @@ class matrix
 **************************************************************************/
 //_________________________________________________________________________
 template <class type>
-matrix<type>::matrix(_DIM height, _DIM width)
+matrix<type>::matrix(size_t height, size_t width)
 {
 	// Sets dimensions of matrix
 	numRows = height;
@@ -96,7 +95,7 @@ matrix<type>::matrix(_DIM height, _DIM width)
 
 //_________________________________________________________________________
 template <class type>
-_DIM matrix<type>::width()	const
+size_t matrix<type>::width()	const
 {
 	return numCols;
 }
@@ -104,7 +103,7 @@ _DIM matrix<type>::width()	const
 
 //_________________________________________________________________________
 template <class type>
-_DIM matrix<type>::height()	const
+size_t matrix<type>::height()	const
 {
 	return numRows;
 }
@@ -122,9 +121,9 @@ matrix<type>::matrix(const matrix<type>& other)
 	elem = new type [numRows * numCols];
 
 	// Copies data from other into element array
-	for (_DIM i = 0; i < numRows; i++)
+	for (size_t i = 0; i < numRows; i++)
 	{
-		for (_DIM j = 0; j < numCols; j++)
+		for (size_t j = 0; j < numCols; j++)
 		{
 			(*this)(i,j) = other(i,j);
 		}
@@ -143,8 +142,8 @@ matrix<type>::~matrix()
 
 //_________________________________________________________________________
 template <class type>
-const type& matrix<type>::operator ()(_DIM row,
-									  _DIM col) const
+const type& matrix<type>::operator ()(size_t row,
+									  size_t col) const
 {
 	if (row >= 0 && row < numRows && col >= 0 && col < numCols)
 	{
@@ -157,7 +156,7 @@ const type& matrix<type>::operator ()(_DIM row,
 				<< "matrix.h: In member function "
 				<< "'template <class type>matrix<type>&"
 				<< "matrix<type>::operator"
-				<< " ()(_DIM row, _DIM col)'"
+				<< " ()(size_t row, size_t col)'"
 				<< endl
 				<< "matrix.h: error: "
 				<< "Index ("
@@ -173,7 +172,7 @@ const type& matrix<type>::operator ()(_DIM row,
 
 //_________________________________________________________________________
 template <class type>
-type& matrix<type>::operator ()(_DIM row, _DIM col)
+type& matrix<type>::operator ()(size_t row, size_t col)
 {
 	if (row >= 0 && row < numRows && col >= 0 && col < numCols)
 	{
@@ -186,7 +185,7 @@ type& matrix<type>::operator ()(_DIM row, _DIM col)
 				<< "matrix.h: In member function "
 				<< "'template <class type>matrix<type>&"
 				<< "matrix<type>::operator"
-				<< " ()(_DIM row, _DIM col)'"
+				<< " ()(size_t row, size_t col)'"
 				<< endl
 				<< "matrix.h: error: "
 				<< "Index ("
@@ -202,10 +201,10 @@ type& matrix<type>::operator ()(_DIM row, _DIM col)
 
 //_________________________________________________________________________
 template <class type>
-matrix<type> matrix<type>::operator ()(_DIM firstRow,
-									   _DIM lastRow,
-									   _DIM firstCol,
-									   _DIM lastCol)
+matrix<type> matrix<type>::operator ()(size_t firstRow,
+									   size_t lastRow,
+									   size_t firstCol,
+									   size_t lastCol)
 {
 	// Check to see if indices are in range
 	if (firstRow >= 0 && firstRow < numRows &&
@@ -221,9 +220,9 @@ matrix<type> matrix<type>::operator ()(_DIM firstRow,
 								  (1 + lastCol - firstCol));
 
 			// Fill the temporary matrix
-			for (_DIM i = 0; i < tempMat.height(); i++)
+			for (size_t i = 0; i < tempMat.height(); i++)
 			{
-				for (_DIM j = 0; j < tempMat.width(); j++)
+				for (size_t j = 0; j < tempMat.width(); j++)
 				{
 					tempMat(i,j) = (*this)(i + firstRow, j + firstCol);
 				}
@@ -239,8 +238,8 @@ matrix<type> matrix<type>::operator ()(_DIM firstRow,
 					<< "matrix.h: In member function "
 					<< "'template <class type>matrix<type>&"
 					<< "matrix<type>::operator"
-					<< " ()(_DIM firstRow, _DIM lastRow,"
-					<< " _DIM firstCol, _DIM lastCol)'"
+					<< " ()(size_t firstRow, size_t lastRow,"
+					<< " size_t firstCol, size_t lastCol)'"
 					<< endl
 					<< "matrix.h: error: "
 					<< "In index range ("
@@ -260,8 +259,8 @@ matrix<type> matrix<type>::operator ()(_DIM firstRow,
 				<< "matrix.h: In member function "
 				<< "'template <class type>matrix<type>&"
 				<< "matrix<type>::operator"
-				<< " ()(_DIM firstRow, _DIM lastRow,"
-				<< " _DIM firstCol, _DIM lastCol)'"
+				<< " ()(size_t firstRow, size_t lastRow,"
+				<< " size_t firstCol, size_t lastCol)'"
 				<< endl
 				<< "matrix.h: error: "
 				<< "Index range ("
@@ -281,7 +280,7 @@ template <class type>
 void matrix<type>::fill(const type& val)
 {
 	// Fills elem[] with val
-	for (_DIM i = 0; i < (numRows * numCols); i++)
+	for (size_t i = 0; i < (numRows * numCols); i++)
 	{
 		elem[i] = val;
 	}
@@ -291,13 +290,13 @@ void matrix<type>::fill(const type& val)
 //_________________________________________________________________________
 // Swaps row 'i' with row 'j'
 template <class type>
-void matrix<type>::rowSwap(_DIM i, _DIM j)
+void matrix<type>::rowSwap(size_t i, size_t j)
 {
 	// Temporary element
 	type temp;
 	
 	// Swap the elements in row 'i' with the elements in row 'j'
-	for (_DIM k = 0; k < numCols; k++)
+	for (size_t k = 0; k < numCols; k++)
 	{
 		temp = (*this)(i,k);
 		(*this)(i,k) = (*this)(j,k);
@@ -309,13 +308,13 @@ void matrix<type>::rowSwap(_DIM i, _DIM j)
 //_________________________________________________________________________
 // Swaps column 'i' with column 'j'
 template <class type>
-void matrix<type>::colSwap(_DIM i, _DIM j)
+void matrix<type>::colSwap(size_t i, size_t j)
 {
 	// Temporary element
 	type temp;
 	
 	// Swap the elements in column 'i' with the elements in column 'j'
-	for (_DIM k = 0; k < numRows; k++)
+	for (size_t k = 0; k < numRows; k++)
 	{
 		temp = (*this)(k,i);
 		(*this)(k,i) = (*this)(k,j);
@@ -326,10 +325,10 @@ void matrix<type>::colSwap(_DIM i, _DIM j)
 
 //_________________________________________________________________________
 template <class type>
-void matrix<type>::crop(_DIM minrow,
-			_DIM maxrow,
-			_DIM mincol,
-			_DIM maxcol)
+void matrix<type>::crop(size_t minrow,
+			size_t maxrow,
+			size_t mincol,
+			size_t maxcol)
 {
 	// Checks that max's are greater than min's
 	if ((minrow > maxrow) || (mincol > maxcol))
@@ -338,9 +337,9 @@ void matrix<type>::crop(_DIM minrow,
 		cerr	<< endl
 				<< "matrix.h: In member function "
 				<< "'template <class type>void"
-				<< "matrix<type>::crop(_DIM minrow, "
-				<< "_DIM maxrow,"
-				<< "_DIM mincol, _DIM maxcol)'"
+				<< "matrix<type>::crop(size_t minrow, "
+				<< "size_t maxrow,"
+				<< "size_t mincol, size_t maxcol)'"
 				<< endl
 				<< "matrix.h: error: "
 				<< "Max must be greater than min!"
@@ -351,7 +350,7 @@ void matrix<type>::crop(_DIM minrow,
 	}
 
 	// New dimensions
-	_DIM	height = 1 + maxrow - minrow,
+	size_t	height = 1 + maxrow - minrow,
 			width = 1 + maxcol - mincol;
 
 	// Temporary matrix
@@ -359,9 +358,9 @@ void matrix<type>::crop(_DIM minrow,
 	temp = new type [height * width];
 
 	// Copies data from elem to temp
-	for (_DIM row = minrow; row <= maxrow; row++)
+	for (size_t row = minrow; row <= maxrow; row++)
 	{
-		for (_DIM col = mincol; col <= maxcol; col++)
+		for (size_t col = mincol; col <= maxcol; col++)
 		{
 			temp[width * (row - minrow) + col - mincol] = (*this)(row,col);
 		}
@@ -381,13 +380,13 @@ void matrix<type>::crop(_DIM minrow,
 
 //_________________________________________________________________________
 template <class type>
-void matrix<type>::grow(_DIM above,
-						_DIM below,
-						_DIM left,
-						_DIM right)
+void matrix<type>::grow(size_t above,
+						size_t below,
+						size_t left,
+						size_t right)
 {
 	// New dimensions
-	_DIM	height = numRows + above + below,
+	size_t	height = numRows + above + below,
 			width = numCols + left + right;
 
 	// Temporary matrix
@@ -395,9 +394,9 @@ void matrix<type>::grow(_DIM above,
 	temp = new type [height * width];
 
 	// Copies data from elem to temp
-	for (_DIM row = above; row < (numRows + above); row++)
+	for (size_t row = above; row < (numRows + above); row++)
 	{
-		for (_DIM col = left; col < (numCols + left); col++)
+		for (size_t col = left; col < (numCols + left); col++)
 		{
 			temp[width * row + col] = (*this)((row - above), (col - left));
 		}
@@ -417,10 +416,10 @@ void matrix<type>::grow(_DIM above,
 
 //_________________________________________________________________________
 template <class type>
-void matrix<type>::grow(_DIM above,
-						_DIM below,
-						_DIM left,
-						_DIM right,
+void matrix<type>::grow(size_t above,
+						size_t below,
+						size_t left,
+						size_t right,
 						type val)
 {
 	// Increases size of matrix
@@ -428,34 +427,34 @@ void matrix<type>::grow(_DIM above,
 
 	// Fills extra spaces
 	// (Top rows)
-	for (_DIM row = 0; row < above; row++)
+	for (size_t row = 0; row < above; row++)
 	{
-		for (_DIM col = 0; col < numCols; col++)
+		for (size_t col = 0; col < numCols; col++)
 		{
 			(*this)(row,col) = val;
 		}
 	}
 
 	// (Bottom rows)
-	for (_DIM row = (numRows - 1); row >= (numRows - below); row--)
+	for (size_t row = (numRows - 1); row >= (numRows - below); row--)
 	{
-		for (_DIM col = 0; col < numCols; col++)
+		for (size_t col = 0; col < numCols; col++)
 		{
 			(*this)(row,col) = val;
 		}
 	}
 
 	// (Left-over spaces)
-	for (_DIM row = above; row < (numRows - below); row++)
+	for (size_t row = above; row < (numRows - below); row++)
 	{
 		// Left spaces
-		for (_DIM col = 0; col < left; col++)
+		for (size_t col = 0; col < left; col++)
 		{
 			(*this)(row,col) = val;
 		}
 
 		// Right spaces
-		for (_DIM col = (numCols - 1); col >= (numCols - right); col--)
+		for (size_t col = (numCols - 1); col >= (numCols - right); col--)
 		{
 			(*this)(row,col) = val;
 		}
@@ -482,9 +481,9 @@ matrix<type>& matrix<type>::
 		elem = new type [numRows * numCols];
 
 		// Copies data from other into element array
-		for (_DIM i = 0; i < numRows; i++)
+		for (size_t i = 0; i < numRows; i++)
 		{
-			for (_DIM j = 0; j < numCols; j++)
+			for (size_t j = 0; j < numCols; j++)
 			{
 				(*this)(i,j) = other(i,j);
 			}

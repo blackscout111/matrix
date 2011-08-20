@@ -22,13 +22,13 @@ namespace matrixmath
 //______________________________________________________________________________
 // Returns an identity matrix with dimensions of 'height' and 'width'
 template <class type>
-const matrix<type> idnty(_DIM height, _DIM width)
+const matrix<type> idnty(size_t height, size_t width)
 {
 	matrix<type> mat(height,width);
 
-	for (_DIM i = 0; i < height; i++)
+	for (size_t i = 0; i < height; i++)
 	{
-		for (_DIM j = 0; j < width; j++)
+		for (size_t j = 0; j < width; j++)
 		{
                     if (i == j)
                     {
@@ -49,7 +49,7 @@ const matrix<type> idnty(_DIM height, _DIM width)
 //______________________________________________________________________________
 // Returns a square identity matrix with dimension of 'dim'
 template <class type>
-const matrix<type> idnty(_DIM dim=1)
+const matrix<type> idnty(size_t dim=1)
 {
     return idnty<type>(dim,dim);
 }
@@ -59,7 +59,7 @@ const matrix<type> idnty(_DIM dim=1)
 //______________________________________________________________________________
 // Returns a matrix filled with ones with dimensions of 'height' and 'width'
 template <class type>
-const matrix<type> ones(_DIM height, _DIM width)
+const matrix<type> ones(size_t height, size_t width)
 {
     matrix<type> mat(height,width);
 
@@ -74,13 +74,13 @@ const matrix<type> ones(_DIM height, _DIM width)
 //______________________________________________________________________________
 // Returns a square matrix filled with ones width dimension of 'dim'
 template <class type>
-const matrix<type> ones(_DIM dim=1){return ones<type>(dim,dim);}
+const matrix<type> ones(size_t dim=1){return ones<type>(dim,dim);}
 
 
 //______________________________________________________________________________
 // Returns a matrix filled with zeros width dimensions of 'height' and 'width'
 template <class type>
-const matrix<type> zeros(_DIM height, _DIM width)
+const matrix<type> zeros(size_t height, size_t width)
 {
     matrix<type> mat(height,width);
 
@@ -95,7 +95,7 @@ const matrix<type> zeros(_DIM height, _DIM width)
 //______________________________________________________________________________
 // Returns a square matrix filled with zeros width dimension of 'dim'
 template <class type>
-const matrix<type> zeros(_DIM dim=1){return zeros<type>(dim,dim);}
+const matrix<type> zeros(size_t dim=1){return zeros<type>(dim,dim);}
 
 };// namespace matrixmath
 

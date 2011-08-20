@@ -5,12 +5,13 @@
 #include "matrixmath.h"
 
 using namespace std;
+using namespace matrixmath;
 
 void dispNumMat(const matrix<int>& mat)
 {
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			cout << setw(3) << mat(i,j);
 		}
@@ -23,9 +24,9 @@ void dispNumMat(const matrix<int>& mat)
 
 void dispNumMat(const matrix<float>& mat)
 {
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			cout << setw(4) << mat(i,j);
 		}
@@ -38,9 +39,9 @@ void dispNumMat(const matrix<float>& mat)
 
 void dispNumMat(const matrix<double>& mat)
 {
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			cout << setw(4) << mat(i,j);
 		}
@@ -53,9 +54,9 @@ void dispNumMat(const matrix<double>& mat)
 
 void dispStrMat(const matrix<string>& strmat)
 {
-	for (_DIM i = 0; i < strmat.height(); i++)
+	for (size_t i = 0; i < strmat.height(); i++)
 	{
-		for (_DIM j = 0; j < strmat.width(); j++)
+		for (size_t j = 0; j < strmat.width(); j++)
 		{
 			cout << setw(15) << strmat(i,j);
 		}
@@ -78,9 +79,9 @@ int main()
 
 	// Fill a
 	int count = 0;
-	for (_DIM i = 0; i < a.height(); i++)
+	for (size_t i = 0; i < a.height(); i++)
 	{
-		for (_DIM j = 0; j < a.width(); j++)
+		for (size_t j = 0; j < a.width(); j++)
 		{
 			a(i,j) = count;
 			count++;

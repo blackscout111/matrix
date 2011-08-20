@@ -7,6 +7,7 @@
 #include <typeinfo>
 
 #include "matrix.h"
+#include "matrixmath00.h" // Needed for checking the type of matrix
 
 using namespace std;
 

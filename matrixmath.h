@@ -27,6 +27,4 @@
 #include "matrixmath03.h"
 #include "matrixmath04.h"
 
-using namespace matrixmath;
-
 #endif

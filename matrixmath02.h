@@ -27,9 +27,9 @@ const matrix<type> trans(const matrix<type> mat)
 {
 	matrix<type> trans(mat.width(), mat.height());
 
-	for (_DIM i = 0; i < trans.height(); i++)
+	for (size_t i = 0; i < trans.height(); i++)
 	{
-		for (_DIM j = 0; j < trans.width(); j++)
+		for (size_t j = 0; j < trans.width(); j++)
 		{
 			trans(i,j) = mat(j,i);
 		}
@@ -69,7 +69,7 @@ const type trace(const matrix<type> mat)
 	}
 
 	// Adds up the values along the main diagonal
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 		trace += mat(i,i);
 	}
@@ -93,11 +93,11 @@ const matrix<type> max(const matrix<type> mat)
 	// The current maximum value
 	type maxVal;
 
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 		maxVal = mat(i,0);
 
-		for (_DIM j = 1; j < mat.width(); j++)
+		for (size_t j = 1; j < mat.width(); j++)
 		{
 			// A new maximum has been found
 			if (maxVal < mat(i,j))
@@ -125,9 +125,9 @@ const type max2d(const matrix<type> mat)
 	// The current maximum value
 	type maxVal;
 
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			// The first value checked
 			if ((i == 0) && (j == 0))
@@ -162,11 +162,11 @@ const matrix<type> min(const matrix<type> mat)
 	// The current minimum value
 	type minVal;
 
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 		minVal = mat(i,0);
 
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			// A new minimum has been found
 			if (minVal > mat(i,j))
@@ -194,9 +194,9 @@ const type min2d(const matrix<type> mat)
 	// The current minimum value
 	type minVal;
 
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			// The first value checked
 			if ((i == 0) && (j == 0))
@@ -230,10 +230,10 @@ const matrix<type> sum(const matrix<type> mat)
 
 	// The sum of all of the elements in a row
 	type rowSum = 0;
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			// Add up the sum
 			rowSum += mat(i,j);
@@ -258,9 +258,9 @@ const type sum2d(const matrix<type> mat)
 
 	// The sum of all of the elements in the matrix
 	type sum = 0;
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			// Add up the sum
 			sum += mat(i,j);
@@ -286,7 +286,7 @@ const matrix<type> mean(const matrix<type> mat)
 	// Calculate the sum of each row
 	mean = sum(mat);
 
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 		// Calculate the mean of each row
 		mean(i,0) = (type)((double)mean(i,0)/(double)mat.width());
@@ -357,10 +357,10 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 
 	// Calculate partial variances
 	rmean = mean(mat);
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 		rsum = 0;
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			if (mat(i,j) > rmean(i,0))
 			{
@@ -435,9 +435,9 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 
 	// Calculate the total variance
 	mean = mean2d(mat);
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
-		for (_DIM j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); j++)
 		{
 			if (mat(i,j) > mean)
 			{
@@ -450,10 +450,10 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 		}
 	}
 
-	if ((double)((mat.width() * mat.height()) - (_DIM)bias) != 0)
+	if ((double)((mat.width() * mat.height()) - (size_t)bias) != 0)
 	{
 		return (type)(	(double)variance/
-						(double)((mat.width() * mat.height()) - (_DIM)bias)
+						(double)((mat.width() * mat.height()) - (size_t)bias)
 						);
 	}
 	else
@@ -513,7 +513,7 @@ const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
 
 	// Calculate standard deviations (the square root of the variance)
 	stdeviation = vari(mat, bias);
-	for (_DIM i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); i++)
 	{
 		stdeviation(i,0) = (type)sqrt((double)stdeviation(i,0));
 	}
@@ -568,7 +568,7 @@ const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
 // * If dim = 1 then will calculate cofactors along row 'idx'
 // * If dim = 2 then will calculate cofactors along column 'idx'
 template <class type>
-const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
+const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 {
 	// Check to see if the matrix contains elements of a type that can do math
 	// (Exits the program if they can't)
@@ -581,7 +581,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type det(const matrix<type> mat"
-				<< ", unsigned char dim= 1, _DIM idx= 0)'"
+				<< ", unsigned char dim= 1, size_t idx= 0)'"
 				<< endl
 				<< "matrixmath.h: error: "
 				<< "Can only take the determinant of a square matrix!"
@@ -601,7 +601,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 		cerr	<< endl
 				<< "matrixmath.h: In function "
 				<< "'template <class type>const type det(const matrix<type> mat"
-				<< ", unsigned char dim= 1, _DIM idx= 0)'"
+				<< ", unsigned char dim= 1, size_t idx= 0)'"
 				<< endl
 				<< "matrixmath.h: error: "
 				<< "Cannot take the determinant of a 1x1 matrix!"
@@ -624,20 +624,20 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 			////////////////////////////////////////////////////////////////////
 			// Calculate cofactors along the row 'idx'
 			case 1:
-				  for(_DIM curCol = 0; curCol < mat.width(); curCol++)
+				  for(size_t curCol = 0; curCol < mat.width(); curCol++)
 				  {
 					  if (mat(idx,curCol) != 0)
 					  {
 						  // Cofactor matrix
 						  matrix <type> cofac(mat.height() - 1, mat.width() -1);
-						  _DIM idxCnt = 0;
+						  size_t idxCnt = 0;
 
 						  // Fill Cofactor matrix
-						  for(_DIM row = 0; row < mat.height(); row++)
+						  for(size_t row = 0; row < mat.height(); row++)
 						  {
 							  if (row != idx)
 							  {
-								  for(_DIM col = 0; col < mat.width(); col++)
+								  for(size_t col = 0; col < mat.width(); col++)
 								  {
 									if (col != curCol)
 									{
@@ -663,20 +663,20 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 			////////////////////////////////////////////////////////////////////
 			// Calculate cofactors along the column 'idx'
 			case 2:
-				  for(_DIM curRow = 0; curRow < mat.height(); curRow++)
+				  for(size_t curRow = 0; curRow < mat.height(); curRow++)
 				  {
 					  if( mat(curRow,idx) != 0)
 					  {
 						  // Cofactor matrix
 						  matrix <type> cofac(mat.height() - 1, mat.width() -1);
-						  _DIM idxCnt = 0;
+						  size_t idxCnt = 0;
 
 						  // Fill Cofactor matrix
-						  for(_DIM row = 0; row < mat.height(); row++)
+						  for(size_t row = 0; row < mat.height(); row++)
 						  {
 							  if (row != curRow)
 							  {
-								  for(_DIM col = 0; col < mat.width(); col++)
+								  for(size_t col = 0; col < mat.width(); col++)
 								  {
 									if (col != idx)
 									{
@@ -707,7 +707,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, _DIM idx= 0)
 						<< "matrixmath.h: In function "
 						<< "'template <class type>const type det(const "
 						<< "matrix<type> mat, "
-						<< "unsigned char dim= 1, _DIM idx= 0)'"
+						<< "unsigned char dim= 1, size_t idx= 0)'"
 						<< endl
 						<< "matrixmath.h: error: "
 						<< "dim= " << (unsigned int)dim << " is out of bounds!"
