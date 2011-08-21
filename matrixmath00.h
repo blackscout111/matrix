@@ -10,6 +10,11 @@
 
 using namespace std;
 
+/*******************************************************************************
+* Compiler definitions that affect the behavior of matrixmath functions
+*******************************************************************************/
+#define _MTXSAFE 1
+#define DBL_MAX 1.7976931348623158e+308 /* max value */
 
 namespace matrixmath
 {
@@ -24,7 +29,7 @@ namespace matrixmath
 // Checks to see if a matrix's entries are of an appropriate type
 // (e.g. int, double, float, char...)
 template <class type>
-bool isMathType(matrix<type> mat)
+bool isMathType(const matrix<type> &mat)
 {
 	// Its a type that can have math done with it
 	if (
@@ -67,7 +72,7 @@ bool isMathType(matrix<type> mat)
 // not of an appropriate type.
 // (Determined by isMathType(...))
 template <class type>
-void continueIfMathType(matrix<type> mat)
+void continueIfMathType(const matrix<type> &mat)
 {
 	// If the matrix can have math done with it
 	if (isMathType(mat))

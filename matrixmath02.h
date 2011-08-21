@@ -18,12 +18,12 @@ namespace matrixmath
 /*******************************************************************************
 * This file normally included from matrixmath.h
 *
-* Section 02:	Special matrix functions (e.g. transpose, row reduction,...)
+* Section 02:	Special matrix functions (e.g. transpose, variance,...)
 *******************************************************************************/
 //______________________________________________________________________________
 // Returns the transpose of a matrix
 template <class type>
-const matrix<type> trans(const matrix<type> mat)
+const matrix<type> trans(const matrix<type>& mat)
 {
 	matrix<type> trans(mat.width(), mat.height());
 
@@ -42,7 +42,7 @@ const matrix<type> trans(const matrix<type> mat)
 //______________________________________________________________________________
 // Returns the trace of a matrix
 template <class type>
-const type trace(const matrix<type> mat)
+const type trace(const matrix<type>& mat)
 {
 	// Check to see if the matrix contains elements of a type that can do math
 	// (Exits the program if they can't)
@@ -57,8 +57,8 @@ const type trace(const matrix<type> mat)
 		// Display error message and terminate the program
 		cerr	<< endl
 				<< "matrixmath.h: In function "
-				<< "'template <class type> const type trace(const matrix<type> "
-				<< "mat)'"
+				<< "'template <class type> const type trace(const matrix<type>&"
+				<< " mat)'"
 				<< endl
 				<< "matrixmath.h: error: "
 				<< "Can only take the trace of a square matrix!"
@@ -82,7 +82,7 @@ const type trace(const matrix<type> mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the maximum values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> max(const matrix<type> mat)
+const matrix<type> max(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
@@ -116,7 +116,7 @@ const matrix<type> max(const matrix<type> mat)
 //______________________________________________________________________________
 // Returns the maximum value of all the elements in 'mat'
 template <class type>
-const type max2d(const matrix<type> mat)
+const type max2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
@@ -151,7 +151,7 @@ const type max2d(const matrix<type> mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the minimum values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> min(const matrix<type> mat)
+const matrix<type> min(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
@@ -185,7 +185,7 @@ const matrix<type> min(const matrix<type> mat)
 //______________________________________________________________________________
 // Returns the minimum value of all the elements in 'mat'
 template <class type>
-const type min2d(const matrix<type> mat)
+const type min2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
@@ -220,7 +220,7 @@ const type min2d(const matrix<type> mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the sum of the values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> sum(const matrix<type> mat)
+const matrix<type> sum(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
@@ -250,7 +250,7 @@ const matrix<type> sum(const matrix<type> mat)
 //______________________________________________________________________________
 // Returns the average value of all the elements in 'mat'
 template <class type>
-const type sum2d(const matrix<type> mat)
+const type sum2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
@@ -275,21 +275,24 @@ const type sum2d(const matrix<type> mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the average values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> mean(const matrix<type> mat)
+const matrix<double> mean(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	matrix<type> mean;
+	matrix<double> mean(mat.height(), 1);
 
-	// Calculate the sum of each row
-	mean = sum(mat);
+	double inv_n = 1/(double)mat.width();
 
-	for (size_t i = 0; i < mat.height(); i++)
+	mean.fill(0);
+	for (size_t i = 0; i < mean.height(); ++i)
 	{
-		// Calculate the mean of each row
-		mean(i,0) = (type)((double)mean(i,0)/(double)mat.width());
+		for (size_t j = 0; j < mat.width(); ++j)
+		{
+			mean(i,0) += (double)mat(i,j);
+		}
+		mean(i,0) *= inv_n;
 	}
 
 	return mean;
@@ -299,19 +302,13 @@ const matrix<type> mean(const matrix<type> mat)
 //______________________________________________________________________________
 // Returns the average value of all the elements in 'mat'
 template <class type>
-const type mean2d(const matrix<type> mat)
+const double mean2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	// The sum of all of the elements in the matrix
-	type mean = 0;
-	mean =	(type)(
-				(double)sum2d(mat)/((double)mat.height()*(double)mat.width())
-				);
-	
-	return mean;
+	return ((double)sum2d(mat))/((double)mat.height()*(double)mat.width());
 }
 
 
@@ -319,80 +316,65 @@ const type mean2d(const matrix<type> mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the variance of the values of the elements in the
 // rows of 'mat'.
-// *	If 'bias' = 0 then the population variance is calculated
-// *	If 'bias' = 1 (default) then the sample variance is calculated
+// *	If 'isPop' = true then the population variance is calculated
+// *	If 'isPop' = false (default) then the sample variance is calculated
 template <class type>
-const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
+const matrix<double> vari(const matrix<type>& mat, bool isPop= false)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	matrix<type>	variance(mat.height(), 1),	// The variance values
-					rmean,						// The mean values of each row
-					pvari(mat.height(),			// The partial variances
-						  mat.width());
+	matrix<double>	variance(mat.height(), 1);
 
-	// The sum of all partial variances in a row
-	type rsum;
+	double	n = mat.width(),
+			N = n - 1,
+			invn = 1/n,
+			invN = 0,
+			sum = 0,	// sum of row elements
+			sum2 = 0;	// sum of square of row elements
 
-	// Checks to see if the value of bias is allowed
-	if ((bias != 0) && (bias != 1))
+	if (isPop) N += 1;
+	if (N == 0)
 	{
 		// Display error message and terminates the program
 		cerr	<< endl
 				<< "matrixmath.h: In function "
-				<< "'template <class type>const type vari(const matrix<type> "
-				<< "mat, unsigned char bias= 1)'"
+				<< "'template <class type>const double vari(const matrix<type>&"
+				<< " mat, bool isPop= false)'"
 				<< endl
 				<< "matrixmath.h: error: "
-				<< "bias= " << (unsigned int)bias << " is out of bounds!"
-				<< endl
-				<< "bias can be 0 or 1"
+				<< "cannot compute variance for a sample size of 1!"
 				<< endl << endl;
 
 		// Exits program
 		std::exit(EXIT_FAILURE);
 	}
+	invN = 1/N;
 
-	// Calculate partial variances
-	rmean = mean(mat);
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t row = 0; row <  mat.height(); ++row)
 	{
-		rsum = 0;
-		for (size_t j = 0; j < mat.width(); j++)
+		for (size_t col = 0; col < mat.width(); ++col)
 		{
-			if (mat(i,j) > rmean(i,0))
-			{
-				pvari(i,j) = (mat(i,j) - rmean(i,0));
-			}
-			else
-			{
-				pvari(i,j) = (rmean(i,0) - mat(i,j));
-			}
+			sum += mat(row,col);
+			sum2 += mat(row,col)*mat(row,col);
 
-			pvari(i,j) *= pvari(i,j);
-			rsum += pvari(i,j);
+#if _MTXSAFE
+			if (sum2 > 0.999*DBL_MAX)
+				// Display overflow warning
+				cerr	<< endl
+						<< "matrixmath.h: In function "
+						<< "'template <class type>const double vari(const "
+						<< "matrix<type>& mat, bool isPop= false)'"
+						<< endl
+						<< "matrixmath.h: warning: "
+						<< "possible overflow"
+						<< endl << endl;
+#endif
 		}
-		if (pvari.width() - bias != 0)
-		{
-			variance(i,0) = (type)((double)rsum/(double)(pvari.width() - bias));
-		}
-		else
-		{
-			// Display error message and terminates the program
-			cerr	<< endl
-					<< "matrixmath.h: In function "
-					<< "'template <class type>const type vari(const matrix<type> "
-					<< "mat, unsigned char bias= 1)'"
-					<< endl
-					<< "matrixmath.h: error: "
-					<< "divide by 0!"
-					<< endl << endl;
-
-			// Exits program
-			std::exit(EXIT_FAILURE);
-		}
+		variance(row,0) = invN*sum2 - invN*invn*sum*sum;
+		sum = 0;
+		sum2 = 0;
 	}
 
 	return variance;
@@ -401,77 +383,64 @@ const matrix<type> vari(const matrix<type> mat, unsigned char bias= 1)
 
 //______________________________________________________________________________
 // Returns the population variance of the values of all the elements in 'mat'
-// *	If 'bias' = 0 then the population variance is calculated
-// *	If 'bias' = 1 (default) then the sample variance is calculated
+// *	If 'isPop' = true then the population variance is calculated
+// *	If 'isPop' = false (default) then the sample variance is calculated
 template <class type>
-const type vari2d(const matrix<type> mat, unsigned char bias= 1)
+const double vari2d(const matrix<type>& mat, bool isPop= false)
 {
 	// Checks to see that the elements are of a type that can do math
-	// (Exits the program if they can't)
-	continueIfMathType(mat);
+		// (Exits the program if they can't)
+		continueIfMathType(mat);
 
-	// Variance
-	type variance = 0,
-		 mean = 0;
+		double	n = mat.width()*mat.height(),
+				N = n - 1,
+				invn = 1/n,
+				invN = 0,
+				sum = 0,	// sum of row elements
+				sum2 = 0;	// sum of square of row elements
 
-	// Checks to see if the value of bias is allowed
-	if ((bias != 0) && (bias != 1))
-	{
-		// Display error message and terminates the program
-		cerr	<< endl
-				<< "matrixmath.h: In function "
-				<< "'template <class type>const type vari2d(const matrix<type> "
-				<< "mat, unsigned char bias= 1)'"
-				<< endl
-				<< "matrixmath.h: error: "
-				<< "bias= " << (unsigned int)bias << " is out of bounds!"
-				<< endl
-				<< "bias can be 0 or 1"
-				<< endl << endl;
-
-		// Exits program
-		std::exit(EXIT_FAILURE);
-	}
-
-	// Calculate the total variance
-	mean = mean2d(mat);
-	for (size_t i = 0; i < mat.height(); i++)
-	{
-		for (size_t j = 0; j < mat.width(); j++)
+		if (isPop) N += 1;
+		if (N == 0)
 		{
-			if (mat(i,j) > mean)
+			// Display error message and terminates the program
+			cerr	<< endl
+					<< "matrixmath.h: In function "
+					<< "'template <class type>const double vari2d(const "
+					<< "matrix<type>& mat, bool isPop= false)'"
+					<< endl
+					<< "matrixmath.h: error: "
+					<< "cannot compute variance for a sample size of 1!"
+					<< endl << endl;
+
+			// Exits program
+			std::exit(EXIT_FAILURE);
+		}
+		invN = 1/N;
+
+		for (size_t row = 0; row <  mat.height(); ++row)
+		{
+			for (size_t col = 0; col < mat.width(); ++col)
 			{
-				variance += (mat(i,j) - mean)*(mat(i,j) - mean);
-			}
-			else
-			{
-				variance += (mean - mat(i,j))*(mean - mat(i,j));
+				sum += mat(row,col);
+				sum2 += mat(row,col)*mat(row,col);
+
+#if _MTXSAFE
+				if (sum2 > 0.999*DBL_MAX)
+					// Display overflow warning
+					cerr	<< endl
+							<< "matrixmath.h: In function "
+							<< "'template <class type>const double "
+							<< "vari2d(const matrix<type>& mat, "
+							<< "bool isPop= false)'"
+							<< endl
+							<< "matrixmath.h: warning: "
+							<< "possible overflow"
+							<< endl << endl;
+#endif
 			}
 		}
-	}
 
-	if ((double)((mat.width() * mat.height()) - (size_t)bias) != 0)
-	{
-		return (type)(	(double)variance/
-						(double)((mat.width() * mat.height()) - (size_t)bias)
-						);
-	}
-	else
-	{
-		// Display error message and terminates the program
-		cerr	<< endl
-				<< "matrixmath.h: In function "
-				<< "'template <class type>const type vari2d(const matrix<type> "
-				<< "mat, unsigned char bias= 1)'"
-				<< endl
-				<< "matrixmath.h: error: "
-				<< "divide by 0!"
-				<< endl << endl;
-
-		// Exits program
-		std::exit(EXIT_FAILURE);
-	}
-
+		return (invN*sum2 - invN*invn*sum*sum);
 }
 
 
@@ -479,43 +448,23 @@ const type vari2d(const matrix<type> mat, unsigned char bias= 1)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the standard deviation of the values of the elements in the
 // rows of 'mat'.
-// *	If 'bias' = 0 (default) then the population standard deviation is
-//		calculated
-// *	If 'bias' = 1 then the sample standard deviation is calculated
+// *	If 'isPop' = true then the population variance is calculated
+// *	If 'isPop' = false (default) then the sample variance is calculated
 template <class type>
-const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
+const matrix<double> stdev(const matrix<type>& mat, bool isPop= false)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
 	// Holds the standard deviation values
-	matrix<type>	stdeviation;
-
-	// Checks to see if the value of bias is allowed
-	if ((bias != 0) && (bias != 1))
-	{
-		// Display error message and terminates the program
-		cerr	<< endl
-				<< "matrixmath.h: In function "
-				<< "'template <class type>const type stdev(const matrix<type> "
-				<< "mat, unsigned char bias= 1)'"
-				<< endl
-				<< "matrixmath.h: error: "
-				<< "bias= " << (unsigned int)bias << " is out of bounds!"
-				<< endl
-				<< "bias can be 0 or 1"
-				<< endl << endl;
-
-		// Exits program
-		std::exit(EXIT_FAILURE);
-	}
+	matrix<double>	stdeviation;
 
 	// Calculate standard deviations (the square root of the variance)
-	stdeviation = vari(mat, bias);
+	stdeviation = vari(mat, isPop);
 	for (size_t i = 0; i < mat.height(); i++)
 	{
-		stdeviation(i,0) = (type)sqrt((double)stdeviation(i,0));
+		stdeviation(i,0) = std::sqrt(stdeviation(i,0));
 	}
 
 	return stdeviation;
@@ -529,36 +478,14 @@ const matrix<type> stdev(const matrix<type> mat, unsigned char bias= 1)
 //		calculated
 // *	If 'bias' = 1 then the sample standard deviation is calculated
 template <class type>
-const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
+const double stdev2d(const matrix<type>& mat, bool isPop= false)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	// Standard deviation 
-	type stdev = 0;
-
-	// Checks to see if the value of bias is allowed
-	if ((bias != 0) && (bias != 1))
-	{
-		// Display error message and terminates the program
-		cerr	<< endl
-				<< "matrixmath.h: In function "
-				<< "'template <class type>const type stdev2d(const matrix<type>"
-				<< " mat, unsigned char bias= 1)'"
-				<< endl
-				<< "matrixmath.h: error: "
-				<< "bias= " << (unsigned int)bias << " is out of bounds!"
-				<< endl
-				<< "bias can be 0 or 1"
-				<< endl << endl;
-
-		// Exits program
-		std::exit(EXIT_FAILURE);
-	}
-
 	// Calculate standard deviation (the square root of the variance)
-	return (type)sqrt((double)vari2d(mat, bias));
+	return std::sqrt(vari2d(mat, isPop));
 }
 
 
@@ -568,7 +495,7 @@ const type stdev2d(const matrix<type> mat, unsigned char bias= 1)
 // * If dim = 1 then will calculate cofactors along row 'idx'
 // * If dim = 2 then will calculate cofactors along column 'idx'
 template <class type>
-const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
+const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 {
 	// Check to see if the matrix contains elements of a type that can do math
 	// (Exits the program if they can't)
@@ -580,8 +507,8 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 		// Display error message and terminate the program
 		cerr	<< endl
 				<< "matrixmath.h: In function "
-				<< "'template <class type>const type det(const matrix<type> mat"
-				<< ", unsigned char dim= 1, size_t idx= 0)'"
+				<< "'template <class type>const double det(const matrix<type>&"
+				<< " mat, unsigned char dim= 1, size_t idx= 0)'"
 				<< endl
 				<< "matrixmath.h: error: "
 				<< "Can only take the determinant of a square matrix!"
@@ -592,7 +519,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 	}
 
 	// Value of the determinant 'sum' and the sign of of the minors
-	type detSum = 0, minorSign = 0;
+	double detSum = 0, minorSign = 0;
 
 	// Cannot take the determinant of a 1x1 matrix
 	if (mat.height() == 1)
@@ -600,8 +527,8 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 		// Display error message and terminate the program
 		cerr	<< endl
 				<< "matrixmath.h: In function "
-				<< "'template <class type>const type det(const matrix<type> mat"
-				<< ", unsigned char dim= 1, size_t idx= 0)'"
+				<< "'template <class type>const double det(const matrix<type>&"
+				<< " mat, unsigned char dim= 1, size_t idx= 0)'"
 				<< endl
 				<< "matrixmath.h: error: "
 				<< "Cannot take the determinant of a 1x1 matrix!"
@@ -629,7 +556,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 					  if (mat(idx,curCol) != 0)
 					  {
 						  // Cofactor matrix
-						  matrix <type> cofac(mat.height() - 1, mat.width() -1);
+						  matrix <double> cofac(mat.height() - 1, mat.width() -1);
 						  size_t idxCnt = 0;
 
 						  // Fill Cofactor matrix
@@ -668,7 +595,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 					  if( mat(curRow,idx) != 0)
 					  {
 						  // Cofactor matrix
-						  matrix <type> cofac(mat.height() - 1, mat.width() -1);
+						  matrix <double> cofac(mat.height() - 1, mat.width() -1);
 						  size_t idxCnt = 0;
 
 						  // Fill Cofactor matrix
@@ -705,7 +632,7 @@ const type det(const matrix<type> mat, unsigned char dim= 1, size_t idx= 0)
 				// Display error message and terminates the program
 				cerr	<< endl
 						<< "matrixmath.h: In function "
-						<< "'template <class type>const type det(const "
+						<< "'template <class type>const double det(const "
 						<< "matrix<type> mat, "
 						<< "unsigned char dim= 1, size_t idx= 0)'"
 						<< endl

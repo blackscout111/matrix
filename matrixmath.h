@@ -12,7 +12,7 @@
 * ==============================================================================
 * Section #:	Description:
 * ==============================================================================
-* 00			Functions for checking the types of matrices
+* 00			Functions for checking the types of matrices and #define values
 * 01			Operator overloads(+,+=,-,-=,*)
 * 02			Special matrix functions (e.g. transpose, Gaussian reduction)
 * 03            Functions that generate special matrices (e.g. identity matrix)
