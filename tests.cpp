@@ -113,19 +113,19 @@ int main()
 	dispNumMat(mean(a));
 
 	// Display mean2d(a)
-	printf("%d \n\n",mean2d(a));
+	printf("%f \n\n",mean2d(a));
 
 	// Display vari(a)
 	dispNumMat(vari(a));
 
 	// Display vari2d(a)
-	printf("%d \n\n",vari2d(a));
+	printf("%f \n\n",vari2d(a));
 
 	// Display stdev(a)
 	dispNumMat(stdev(a));
 
 	// Display stdev2d(a)
-	printf("%d \n\n",stdev2d(a));
+	printf("%f \n\n",stdev2d(a));
 
 	// Create other matrix
 	matrix <int> b(5,5);

@@ -519,7 +519,7 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 	}
 
 	// Value of the determinant 'sum' and the sign of of the minors
-	double detSum = 0, minorSign = 0;
+	double detSum = 0;
 
 	// Cannot take the determinant of a 1x1 matrix
 	if (mat.height() == 1)
@@ -627,7 +627,6 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 
 
 			////////////////////////////////////////////////////////////////////
-			// Calculate cofactors along row 0
 			default: 
 				// Display error message and terminates the program
 				cerr	<< endl
