@@ -11,7 +11,7 @@ to add it to the working directory of your code as well.  To use the
 files into your code's working directory and include "matrixmath." into your
 code (This file will include the rest of the matrixmath files.).
 
-The "main" files in this directory are only for testing purposes.  They are used
+The "test.cpp" file in this directory is only for testing purposes.  It is used
 to test the project code and its functions as it is being developed.
 
 Everyone is free to use this code!  Please just reference me in your code as
@@ -23,8 +23,5 @@ constructive feedback/comments.
 ################################################################################
 TO DO:
 ################################################################################
-[0] Fix variance and standard deviation functions in the matrixmath header
-	files.  They currently will overflow if the matrix is too large.
-[1] Implement Fourier transform function
-[2]	Implement Gaussian Reduction function into matrixmath header files
+[1]	Implement Gaussian Reduction function into matrixmath header files
 
