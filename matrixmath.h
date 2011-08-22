@@ -14,9 +14,8 @@
 * ==============================================================================
 * 00			Functions for checking the types of matrices and #define values
 * 01			Operator overloads(+,+=,-,-=,*)
-* 02			Special matrix functions (e.g. transpose, Gaussian reduction)
+* 02			Special matrix functions (e.g. transpose, reduction, statistics)
 * 03            Functions that generate special matrices (e.g. identity matrix)
-* 04			Special mathematical functions (e.g. Fourier transform)
 *
 *******************************************************************************/
 
@@ -25,6 +24,5 @@
 #include "matrixmath01.h"
 #include "matrixmath02.h"
 #include "matrixmath03.h"
-#include "matrixmath04.h"
 
 #endif
