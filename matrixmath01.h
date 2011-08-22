@@ -19,7 +19,7 @@ namespace matrixmath
 * Section 01:	Operator overloads (+,=+,-,-=,*)
 *******************************************************************************/
 //______________________________________________________________________________
-// Overloads the += opperator
+// Overloads the += operator
 template <class type>
 matrix<type>& operator += (matrix<type>& a, const matrix<type>& b)
 {
@@ -29,15 +29,15 @@ matrix<type>& operator += (matrix<type>& a, const matrix<type>& b)
 	continueIfMathType(b);
 
 
-	// The two matricies must have the same dimensions
+	// The two matrices must have the same dimensions
 	if ((a.width() == b.width()) &&
 		(a.height() == b.height()))
 	{
 
 		// Fills the a(i,j) with a(i,j) + b(i,j)
-		for (size_t i = 0; i < a.height(); i++)
+		for (size_t i = 0; i < a.height(); ++i)
 		{
-			for (size_t j = 0; j < a.width(); j++)
+			for (size_t j = 0; j < a.width(); ++j)
 			{
 				a(i,j) += b(i,j);
 			}
@@ -66,7 +66,7 @@ matrix<type>& operator += (matrix<type>& a, const matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the + opperator
+// Overloads the + operator
 template <class type>
 const matrix<type> operator + (const matrix<type>& a, const matrix<type>& b)
 {
@@ -80,7 +80,7 @@ const matrix<type> operator + (const matrix<type>& a, const matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the - opperator
+// Overloads the - operator
 template <class type>
 matrix<type>& operator -= (matrix<type>& a, const matrix<type>& b)
 {
@@ -89,14 +89,14 @@ matrix<type>& operator -= (matrix<type>& a, const matrix<type>& b)
 	continueIfMathType(a);
 	continueIfMathType(b);
 
-	// The two matricies must have the same dimensions
+	// The two matrices must have the same dimensions
 	if ((a.width() == b.width()) &&
 		(a.height() == b.height()))
 	{
 		// Fills the a(i,j) with a(i,j) - b(i,j)
-		for (size_t i = 0; i < a.height(); i++)
+		for (size_t i = 0; i < a.height(); ++i)
 		{
-			for (size_t j = 0; j < a.width(); j++)
+			for (size_t j = 0; j < a.width(); ++j)
 			{
 				a(i,j) -= b(i,j);
 			}
@@ -125,7 +125,7 @@ matrix<type>& operator -= (matrix<type>& a, const matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the - opperator
+// Overloads the - operator
 template <class type>
 const matrix<type> operator - (const matrix<type>& a, const matrix<type>& b)
 {
@@ -139,13 +139,13 @@ const matrix<type> operator - (const matrix<type>& a, const matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the *= opperator when a matrix is multiplied by a number
+// Overloads the *= operator when a matrix is multiplied by a number
 template <class type>
 matrix<type>& operator *= (matrix<type>& a, const type& b)
 {
-	for (size_t i = 0; i < a.height(); i++)
+	for (size_t i = 0; i < a.height(); ++i)
 	{
-		for (size_t j = 0; j < a.width(); j++)
+		for (size_t j = 0; j < a.width(); ++j)
 		{
 			a(i,j) *= b;
 		}
@@ -157,13 +157,13 @@ matrix<type>& operator *= (matrix<type>& a, const type& b)
 
 
 //______________________________________________________________________________
-// Overloads the *= opperator when a number is multiplied by a matrix
+// Overloads the *= operator when a number is multiplied by a matrix
 template <class type>
 matrix<type>& operator *= (const type& a, matrix<type>& b)
 {
-	for (size_t i = 0; i < b.height(); i++)
+	for (size_t i = 0; i < b.height(); ++i)
 	{
-		for (size_t j = 0; j < b.width(); j++)
+		for (size_t j = 0; j < b.width(); ++j)
 		{
 			b(i,j) *= a;
 		}
@@ -175,7 +175,7 @@ matrix<type>& operator *= (const type& a, matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the * opperator when a matrix is multiplied by a number
+// Overloads the * operator when a matrix is multiplied by a number
 template <class type>
 const matrix<type> operator * (const matrix<type>& a, const type& b)
 {
@@ -189,7 +189,7 @@ const matrix<type> operator * (const matrix<type>& a, const type& b)
 
 
 //______________________________________________________________________________
-// Overloads the * opperator when a matrix is multiplied by a number
+// Overloads the * operator when a matrix is multiplied by a number
 template <class type>
 const matrix<type> operator * (const type& a, const matrix<type>& b)
 {
@@ -203,7 +203,7 @@ const matrix<type> operator * (const type& a, const matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the * opperator when a matrix is multiplied by another matrix
+// Overloads the * operator when a matrix is multiplied by another matrix
 template <class type>
 const matrix<type> operator * (const matrix<type>& a, const matrix<type>& b)
 {
@@ -219,15 +219,15 @@ const matrix<type> operator * (const matrix<type>& a, const matrix<type>& b)
 		matrix<type> innerProduct(a.height(), b.width());
 
 		// Fills the innerProduct with a(i,j) - b(i,j)
-		for (size_t i = 0; i < innerProduct.height(); i++)
+		for (size_t i = 0; i < innerProduct.height(); ++i)
 		{
-			for (size_t j = 0; j < innerProduct.width(); j++)
+			for (size_t j = 0; j < innerProduct.width(); ++j)
 			{
 				// Temporary summing variable
 				type sum = 0;
 
 				// Dot row i of a with column j of b
-				for (size_t k = 0; k < a.width(); k++)
+				for (size_t k = 0; k < a.width(); ++k)
 				{
 					sum += a(i,k) * b(k,j);
 				}
@@ -259,7 +259,7 @@ const matrix<type> operator * (const matrix<type>& a, const matrix<type>& b)
 
 
 //______________________________________________________________________________
-// Overloads the *= opperator when a matrix is multiplied by another matrix
+// Overloads the *= operator when a matrix is multiplied by another matrix
 template <class type>
 matrix<type>& operator *= (matrix<type>& a, const matrix<type>& b)
 {

@@ -28,7 +28,7 @@ void dispNumMat(const matrix<float>& mat)
 	{
 		for (size_t j = 0; j < mat.width(); j++)
 		{
-			cout << setw(4) << mat(i,j);
+			cout << setw(8) << setprecision(3) << mat(i,j);
 		}
 
 		cout << endl;
@@ -43,7 +43,7 @@ void dispNumMat(const matrix<double>& mat)
 	{
 		for (size_t j = 0; j < mat.width(); j++)
 		{
-			cout << setw(4) << mat(i,j);
+			cout << setw(8) << setprecision(3) << mat(i,j);
 		}
 
 		cout << endl;
@@ -91,6 +91,13 @@ int main()
 	// Display a
 	dispNumMat(a);
 
+	// Reduce matrix a
+	a.rowSwap(0,1);
+	printf("ref(a) = \n\n");
+	dispNumMat(ref(a));
+	printf("rref(a) = \n\n");
+	dispNumMat(rref(a));
+
 	// Display max(a)
 	dispNumMat(max(a));
 
@@ -126,6 +133,8 @@ int main()
 
 	// Display stdev2d(a)
 	printf("%f \n\n",stdev2d(a));
+
+
 
 	// Create other matrix
 	matrix <int> b(5,5);
@@ -250,12 +259,17 @@ int main()
 	// Test the determinant function
 	////////////////////////////////////////////////////////////////////////////
 	matrix <float> fltMat2x2(2,2);
-	fltMat2x2(0,0) = 1.3;
+	fltMat2x2(0,0) = 1;
 	fltMat2x2(0,1) = 2;
-	fltMat2x2(1,0) = 3.8;
-	fltMat2x2(1,1) = 4;
+	fltMat2x2(1,0) = 3;
+	fltMat2x2(1,1) = 6;
 	dispNumMat(fltMat2x2);
 	printf("det(fltMat2x2) = %f\n\n",det(fltMat2x2));
+	printf("ref(fltMat2x2) = \n\n");
+	dispNumMat(ref(fltMat2x2));
+	printf("rref(fltMat2x2) = \n\n");
+	dispNumMat(rref(fltMat2x2));
+
 
 
 	matrix <float> fltMat3x3(3,3);
@@ -272,6 +286,11 @@ int main()
 	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3));
 	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3,2,1));
 	printf("det(fltMat3x3) = %f\n\n",det(fltMat3x3,2,2));
+	printf("ref(fltMat3x3) = \n\n");
+	dispNumMat(ref(fltMat3x3));
+	printf("rref(fltMat3x3) = \n\n");
+	dispNumMat(rref(fltMat3x3));
+
 	////////////////////////////////////////////////////////////////////////////
 
 	return 0;

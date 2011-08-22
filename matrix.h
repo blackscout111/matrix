@@ -121,9 +121,9 @@ matrix<type>::matrix(const matrix<type>& other)
 	elem = new type [numRows * numCols];
 
 	// Copies data from other into element array
-	for (size_t i = 0; i < numRows; i++)
+	for (size_t i = 0; i < numRows; ++i)
 	{
-		for (size_t j = 0; j < numCols; j++)
+		for (size_t j = 0; j < numCols; ++j)
 		{
 			(*this)(i,j) = other(i,j);
 		}
@@ -220,9 +220,9 @@ matrix<type> matrix<type>::operator ()(size_t firstRow,
 								  (1 + lastCol - firstCol));
 
 			// Fill the temporary matrix
-			for (size_t i = 0; i < tempMat.height(); i++)
+			for (size_t i = 0; i < tempMat.height(); ++i)
 			{
-				for (size_t j = 0; j < tempMat.width(); j++)
+				for (size_t j = 0; j < tempMat.width(); ++j)
 				{
 					tempMat(i,j) = (*this)(i + firstRow, j + firstCol);
 				}
@@ -280,7 +280,7 @@ template <class type>
 void matrix<type>::fill(const type& val)
 {
 	// Fills elem[] with val
-	for (size_t i = 0; i < (numRows * numCols); i++)
+	for (size_t i = 0; i < (numRows * numCols); ++i)
 	{
 		elem[i] = val;
 	}
@@ -296,7 +296,7 @@ void matrix<type>::rowSwap(size_t i, size_t j)
 	type temp;
 	
 	// Swap the elements in row 'i' with the elements in row 'j'
-	for (size_t k = 0; k < numCols; k++)
+	for (size_t k = 0; k < numCols; ++k)
 	{
 		temp = (*this)(i,k);
 		(*this)(i,k) = (*this)(j,k);
@@ -314,7 +314,7 @@ void matrix<type>::colSwap(size_t i, size_t j)
 	type temp;
 	
 	// Swap the elements in column 'i' with the elements in column 'j'
-	for (size_t k = 0; k < numRows; k++)
+	for (size_t k = 0; k < numRows; ++k)
 	{
 		temp = (*this)(k,i);
 		(*this)(k,i) = (*this)(k,j);
@@ -358,9 +358,9 @@ void matrix<type>::crop(size_t minrow,
 	temp = new type [height * width];
 
 	// Copies data from elem to temp
-	for (size_t row = minrow; row <= maxrow; row++)
+	for (size_t row = minrow; row <= maxrow; ++row)
 	{
-		for (size_t col = mincol; col <= maxcol; col++)
+		for (size_t col = mincol; col <= maxcol; ++col)
 		{
 			temp[width * (row - minrow) + col - mincol] = (*this)(row,col);
 		}
@@ -394,9 +394,9 @@ void matrix<type>::grow(size_t above,
 	temp = new type [height * width];
 
 	// Copies data from elem to temp
-	for (size_t row = above; row < (numRows + above); row++)
+	for (size_t row = above; row < (numRows + above); ++row)
 	{
-		for (size_t col = left; col < (numCols + left); col++)
+		for (size_t col = left; col < (numCols + left); ++col)
 		{
 			temp[width * row + col] = (*this)((row - above), (col - left));
 		}
@@ -427,34 +427,34 @@ void matrix<type>::grow(size_t above,
 
 	// Fills extra spaces
 	// (Top rows)
-	for (size_t row = 0; row < above; row++)
+	for (size_t row = 0; row < above; ++row)
 	{
-		for (size_t col = 0; col < numCols; col++)
+		for (size_t col = 0; col < numCols; ++col)
 		{
 			(*this)(row,col) = val;
 		}
 	}
 
 	// (Bottom rows)
-	for (size_t row = (numRows - 1); row >= (numRows - below); row--)
+	for (size_t row = (numRows - 1); row >= (numRows - below); --row)
 	{
-		for (size_t col = 0; col < numCols; col++)
+		for (size_t col = 0; col < numCols; ++col)
 		{
 			(*this)(row,col) = val;
 		}
 	}
 
 	// (Left-over spaces)
-	for (size_t row = above; row < (numRows - below); row++)
+	for (size_t row = above; row < (numRows - below); ++row)
 	{
 		// Left spaces
-		for (size_t col = 0; col < left; col++)
+		for (size_t col = 0; col < left; ++col)
 		{
 			(*this)(row,col) = val;
 		}
 
 		// Right spaces
-		for (size_t col = (numCols - 1); col >= (numCols - right); col--)
+		for (size_t col = (numCols - 1); col >= (numCols - right); --col)
 		{
 			(*this)(row,col) = val;
 		}
@@ -481,9 +481,9 @@ matrix<type>& matrix<type>::
 		elem = new type [numRows * numCols];
 
 		// Copies data from other into element array
-		for (size_t i = 0; i < numRows; i++)
+		for (size_t i = 0; i < numRows; ++i)
 		{
-			for (size_t j = 0; j < numCols; j++)
+			for (size_t j = 0; j < numCols; ++j)
 			{
 				(*this)(i,j) = other(i,j);
 			}

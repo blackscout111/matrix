@@ -17,7 +17,7 @@ namespace matrixmath
 /*******************************************************************************
 * This file normally included from matrixmath.h
 *
-* Section 03:	Functions that generate special matricies (e.g. identity matrix)
+* Section 03:	Functions that generate special matrices (e.g. identity matrix)
 *******************************************************************************/
 //______________________________________________________________________________
 // Returns an identity matrix with dimensions of 'height' and 'width'
@@ -26,9 +26,9 @@ const matrix<type> idnty(size_t height, size_t width)
 {
 	matrix<type> mat(height,width);
 
-	for (size_t i = 0; i < height; i++)
+	for (size_t i = 0; i < height; ++i)
 	{
-		for (size_t j = 0; j < width; j++)
+		for (size_t j = 0; j < width; ++j)
 		{
                     if (i == j)
                     {

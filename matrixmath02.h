@@ -27,9 +27,9 @@ const matrix<type> trans(const matrix<type>& mat)
 {
 	matrix<type> trans(mat.width(), mat.height());
 
-	for (size_t i = 0; i < trans.height(); i++)
+	for (size_t i = 0; i < trans.height(); ++i)
 	{
-		for (size_t j = 0; j < trans.width(); j++)
+		for (size_t j = 0; j < trans.width(); ++j)
 		{
 			trans(i,j) = mat(j,i);
 		}
@@ -69,7 +69,7 @@ const type trace(const matrix<type>& mat)
 	}
 
 	// Adds up the values along the main diagonal
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		trace += mat(i,i);
 	}
@@ -93,11 +93,11 @@ const matrix<type> max(const matrix<type>& mat)
 	// The current maximum value
 	type maxVal;
 
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		maxVal = mat(i,0);
 
-		for (size_t j = 1; j < mat.width(); j++)
+		for (size_t j = 1; j < mat.width(); ++j)
 		{
 			// A new maximum has been found
 			if (maxVal < mat(i,j))
@@ -125,9 +125,9 @@ const type max2d(const matrix<type>& mat)
 	// The current maximum value
 	type maxVal;
 
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
-		for (size_t j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// The first value checked
 			if ((i == 0) && (j == 0))
@@ -162,11 +162,11 @@ const matrix<type> min(const matrix<type>& mat)
 	// The current minimum value
 	type minVal;
 
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		minVal = mat(i,0);
 
-		for (size_t j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// A new minimum has been found
 			if (minVal > mat(i,j))
@@ -194,9 +194,9 @@ const type min2d(const matrix<type>& mat)
 	// The current minimum value
 	type minVal;
 
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
-		for (size_t j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// The first value checked
 			if ((i == 0) && (j == 0))
@@ -230,10 +230,10 @@ const matrix<type> sum(const matrix<type>& mat)
 
 	// The sum of all of the elements in a row
 	type rowSum = 0;
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
 
-		for (size_t j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// Add up the sum
 			rowSum += mat(i,j);
@@ -258,9 +258,9 @@ const type sum2d(const matrix<type>& mat)
 
 	// The sum of all of the elements in the matrix
 	type sum = 0;
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
-		for (size_t j = 0; j < mat.width(); j++)
+		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// Add up the sum
 			sum += mat(i,j);
@@ -462,7 +462,7 @@ const matrix<double> stdev(const matrix<type>& mat, bool isPop= false)
 
 	// Calculate standard deviations (the square root of the variance)
 	stdeviation = vari(mat, isPop);
-	for (size_t i = 0; i < mat.height(); i++)
+	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		stdeviation(i,0) = std::sqrt(stdeviation(i,0));
 	}
@@ -551,7 +551,7 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 			////////////////////////////////////////////////////////////////////
 			// Calculate cofactors along the row 'idx'
 			case 1:
-				  for(size_t curCol = 0; curCol < mat.width(); curCol++)
+				  for(size_t curCol = 0; curCol < mat.width(); ++curCol)
 				  {
 					  if (mat(idx,curCol) != 0)
 					  {
@@ -560,18 +560,18 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 						  size_t idxCnt = 0;
 
 						  // Fill Cofactor matrix
-						  for(size_t row = 0; row < mat.height(); row++)
+						  for(size_t row = 0; row < mat.height(); ++row)
 						  {
 							  if (row != idx)
 							  {
-								  for(size_t col = 0; col < mat.width(); col++)
+								  for(size_t col = 0; col < mat.width(); ++col)
 								  {
 									if (col != curCol)
 									{
 										cofac(idxCnt/cofac.width(),
 											  idxCnt%cofac.width())
 											= mat(row,col);
-										idxCnt++;
+										++idxCnt;
 									}
 								  }
 							  }
@@ -590,7 +590,7 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 			////////////////////////////////////////////////////////////////////
 			// Calculate cofactors along the column 'idx'
 			case 2:
-				  for(size_t curRow = 0; curRow < mat.height(); curRow++)
+				  for(size_t curRow = 0; curRow < mat.height(); ++curRow)
 				  {
 					  if( mat(curRow,idx) != 0)
 					  {
@@ -599,18 +599,18 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 						  size_t idxCnt = 0;
 
 						  // Fill Cofactor matrix
-						  for(size_t row = 0; row < mat.height(); row++)
+						  for(size_t row = 0; row < mat.height(); ++row)
 						  {
 							  if (row != curRow)
 							  {
-								  for(size_t col = 0; col < mat.width(); col++)
+								  for(size_t col = 0; col < mat.width(); ++col)
 								  {
 									if (col != idx)
 									{
 										cofac(idxCnt/cofac.width(),
 											  idxCnt%cofac.width())
 											= mat(row,col);
-										idxCnt++;
+										++idxCnt;
 									}
 								  }
 							  }
@@ -654,12 +654,135 @@ const double det(const matrix<type>& mat, unsigned char dim= 1, size_t idx= 0)
 
 
 //______________________________________________________________________________
-// Reduces the matrix 'mat' to its row-echelon form
+// Returns the row-echelon form of the matrix 'mat'
+template <class type>
+const matrix<double> ref(const matrix<type>& mat)
+{
+	// Check to see if the matrix contains elements of a type that can do math
+	// (Exits the program if they can't)
+	continueIfMathType(mat);
 
+	matrix<double> refmat(mat.height(), mat.width());
+	for (size_t row = 0; row < mat.height(); ++row)
+	{
+		for (size_t col = 0; col < mat.width(); ++col)
+			refmat(row,col) = (double)mat(row,col);
+	}
+
+	size_t row = 0, col = 0, maxidx = 0;
+	double absmax = 0, invmax = 0, val = 0;
+	while ((row < refmat.height()) && (col < refmat.width()))
+	{
+		cout << "row: " << row << " col: " << col << endl;
+		// Find the row with the highest valued element in the current column
+		maxidx = row;
+		absmax = std::abs(refmat(maxidx, col));
+		for (size_t i = maxidx + 1; i < refmat.height(); ++i)
+		{
+			if (absmax < std::abs(refmat(i,col)))
+			{
+				maxidx = i;
+				absmax = std::abs(refmat(i,col));
+			}
+		}
+		invmax = 1/refmat(maxidx, col);
+
+
+		// If the current column isn't filled with zeros, swap the row with the
+		// highest value in the current column with the current row and divide
+		// all of it's elements by the max value; then subtract multiples of the
+		// newly swapped row from the other rows below it that have non-zero
+		// elements in the current column.
+		if (absmax != 0)
+		{
+			refmat.rowSwap(maxidx,row);
+
+			for (size_t i = col; i < refmat.width(); ++i)
+				refmat(row, i) *= invmax;
+
+			for (size_t i = row + 1; i < refmat.height(); ++i)
+			{
+				val = refmat(i,col);
+				if (val != 0)
+				{
+					for (size_t j = col; j < refmat.width(); ++j)
+						refmat(i, j) -= val*refmat(row,j);
+				}
+			}
+			++row;
+		}
+		++col;
+	}
+
+	return refmat;
+}
 
 //______________________________________________________________________________
 // Reduces the matrix 'mat' to its reduced row-echelon form
+template <class type>
+const matrix<double> rref(const matrix<type>& mat)
+{
+	// Check to see if the matrix contains elements of a type that can do math
+	// (Exits the program if they can't)
+	continueIfMathType(mat);
 
+	matrix<double> rrefmat(mat.height(), mat.width());
+	for (size_t row = 0; row < mat.height(); ++row)
+	{
+		for (size_t col = 0; col < mat.width(); ++col)
+			rrefmat(row,col) = (double)mat(row,col);
+	}
+
+	size_t row = 0, col = 0, maxidx = 0;
+	double absmax = 0, invmax = 0, val = 0;
+	while ((row < rrefmat.height()) && (col < rrefmat.width()))
+	{
+		cout << "row: " << row << " col: " << col << endl;
+		// Find the row with the highest valued element in the current column
+		maxidx = row;
+		absmax = std::abs(rrefmat(maxidx, col));
+		for (size_t i = maxidx + 1; i < rrefmat.height(); ++i)
+		{
+			if (absmax < std::abs(rrefmat(i,col)))
+			{
+				maxidx = i;
+				absmax = std::abs(rrefmat(i,col));
+			}
+		}
+		invmax = 1/rrefmat(maxidx, col);
+
+
+		// If the current column isn't filled with zeros, swap the row with the
+		// highest value in the current column with the current row and divide
+		// all of it's elements by the max value; then subtract multiples of the
+		// newly swapped row from the other rows below it that have non-zero
+		// elements in the current column.
+		if (absmax != 0)
+		{
+			rrefmat.rowSwap(maxidx,row);
+
+			for (size_t i = col; i < rrefmat.width(); ++i)
+				rrefmat(row, i) *= invmax;
+
+			for (size_t i = 0; i < rrefmat.height(); ++i)
+			{
+				if (i != row)
+				{
+					val = rrefmat(i,col);
+					if (val != 0)
+					{
+						for (size_t j = col; j < rrefmat.width(); ++j)
+							rrefmat(i, j) -= val*rrefmat(row,j);
+					}
+				}
+			}
+			++row;
+		}
+		++col;
+	}
+
+	return rrefmat;
+}
 
 } // namespace matrixmath
 
