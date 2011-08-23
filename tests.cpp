@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "matrix.h"
 #include "matrixmath.h"
 
 using namespace std;
@@ -102,19 +101,19 @@ int main()
 	dispNumMat(max(a));
 
 	// Display max2d(a)
-	printf("%d \n\n",max2d(a));
+	printf("%f \n\n",max2d(a));
 
 	// Display min(a)
 	dispNumMat(min(a));
 
 	// Display min2d(a)
-	printf("%d \n\n",min2d(a));
+	printf("%f \n\n",min2d(a));
 
 	// Display sum(a)
 	dispNumMat(sum(a));
 
 	// Display sum2d(a)
-	printf("%d \n\n",sum2d(a));
+	printf("%f \n\n",sum2d(a));
 
 	// Display mean(a)
 	dispNumMat(mean(a));
@@ -210,7 +209,7 @@ int main()
 	// Displays (d*2 - 3*(ones(d.height(),d.width())))
 	dispNumMat(d*(int)2 - (int)3*idnty<int>(d.height(),d.width()));
 
-	printf("%d\n\n",trace(d*(int)2 - (int)3*idnty<int>(d.height(),d.width())));
+	printf("%f\n\n",trace(d*(int)2 - (int)3*idnty<int>(d.height(),d.width())));
 
 	dispNumMat(idnty<int>(10));
 

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-namespace matrix
+namespace matrixmath
 {
 
 /*******************************************************************************
@@ -97,6 +97,6 @@ const matrix<type> zeros(size_t height, size_t width)
 template <class type>
 const matrix<type> zeros(size_t dim=1){return zeros<type>(dim,dim);}
 
-} // namespace matrix
+} // namespace matrixmath
 
 #endif

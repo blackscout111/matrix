@@ -13,7 +13,8 @@ to add it to the working directory of your code as well.  To use the
 "matrixmath" programs copy "matrixmath.h" and all of the "matrixmathXX.h"
 files into your code's working directory and include "matrixmath." into your
 code. (This file will include the rest of the matrixmath files.) The
-"matrixmath" functions and objects are inside of the "matrix" namespace.
+"matrixmath" functions are inside of the "matrixmath" namespace. The "matrix"
+object is not inside of any namespace.
 
 The "test.cpp" file in this directory is only for testing purposes.  It is used
 to test the project code and its functions as it is being developed.

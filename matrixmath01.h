@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace matrix
+namespace matrixmath
 {
 
 /*******************************************************************************
@@ -270,6 +270,6 @@ matrix<type>& operator *= (matrix<type>& a, const matrix<type>& b)
 	return a;
 }
 
-} // namespace matrix
+} // namespace matrixmath
 
 #endif

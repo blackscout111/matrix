@@ -5,11 +5,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-
 using namespace std;
-
-namespace matrix
-{
 
 // matrix is a 2-D array with elements of type 'type'.
 template <class type>
@@ -79,9 +75,11 @@ class matrix
 		type	*elem;		// The elements matrix
 };
 
+
 /**************************************************************************
 * Function Definitions													  *
 **************************************************************************/
+
 //_________________________________________________________________________
 template <class type>
 matrix<type>::matrix(size_t height, size_t width)
@@ -494,7 +492,5 @@ matrix<type>& matrix<type>::
 
 	return *this;
 }
-
-} // namespace matrix
 
 #endif

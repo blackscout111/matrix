@@ -12,7 +12,7 @@
 
 using namespace std;
 
-namespace matrix
+namespace matrixmath
 {
 
 /*******************************************************************************
@@ -42,14 +42,14 @@ const matrix<type> trans(const matrix<type>& mat)
 //______________________________________________________________________________
 // Returns the trace of a matrix
 template <class type>
-const type trace(const matrix<type>& mat)
+const double trace(const matrix<type>& mat)
 {
 	// Check to see if the matrix contains elements of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
 	// The eventual trace of the matrix
-	type trace = 0;
+	double trace = 0;
 
 	// Check to see if the matrix is square
 	if (mat.height() != mat.width())
@@ -57,8 +57,8 @@ const type trace(const matrix<type>& mat)
 		// Display error message and terminate the program
 		cerr	<< endl
 				<< "matrixmath.h: In function "
-				<< "'template <class type> const type trace(const matrix<type>&"
-				<< " mat)'"
+				<< "'template <class type> const double trace(const "
+				<< "matrix<type>& mat)'"
 				<< endl
 				<< "matrixmath.h: error: "
 				<< "Can only take the trace of a square matrix!"
@@ -71,7 +71,7 @@ const type trace(const matrix<type>& mat)
 	// Adds up the values along the main diagonal
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
-		trace += mat(i,i);
+		trace += (double)mat(i,i);
 	}
 
 	return trace;
@@ -82,27 +82,27 @@ const type trace(const matrix<type>& mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the maximum values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> max(const matrix<type>& mat)
+const matrix<double> max(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	matrix<type> max(mat.height(), 1);
+	matrix<double> max(mat.height(), 1);
 
 	// The current maximum value
-	type maxVal;
+	double maxVal;
 
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
-		maxVal = mat(i,0);
+		maxVal = (double)mat(i,0);
 
 		for (size_t j = 1; j < mat.width(); ++j)
 		{
 			// A new maximum has been found
-			if (maxVal < mat(i,j))
+			if (maxVal < (double)mat(i,j))
 			{
-				maxVal = mat(i,j);
+				maxVal = (double)mat(i,j);
 			}
 		}
 
@@ -116,29 +116,23 @@ const matrix<type> max(const matrix<type>& mat)
 //______________________________________________________________________________
 // Returns the maximum value of all the elements in 'mat'
 template <class type>
-const type max2d(const matrix<type>& mat)
+const double max2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
 	// The current maximum value
-	type maxVal;
+	double maxVal = (double)mat(0,0);
 
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		for (size_t j = 0; j < mat.width(); ++j)
 		{
-			// The first value checked
-			if ((i == 0) && (j == 0))
-			{
-				maxVal = mat(i,j);
-			}
-
 			// A new maximum has been found
-			else if (maxVal < mat(i,j))
+			if (maxVal < (double)mat(i,j))
 			{
-				maxVal = mat(i,j);
+				maxVal = (double)mat(i,j);
 			}
 		}
 	}
@@ -151,27 +145,27 @@ const type max2d(const matrix<type>& mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the minimum values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> min(const matrix<type>& mat)
+const matrix<double> min(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	matrix<type> min(mat.height(), 1);
+	matrix<double> min(mat.height(), 1);
 
 	// The current minimum value
-	type minVal;
+	double minVal;
 
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
-		minVal = mat(i,0);
+		minVal = (double)mat(i,0);
 
 		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// A new minimum has been found
-			if (minVal > mat(i,j))
+			if (minVal > (double)mat(i,j))
 			{
-				minVal = mat(i,j);
+				minVal = (double)mat(i,j);
 			}
 		}
 
@@ -185,29 +179,23 @@ const matrix<type> min(const matrix<type>& mat)
 //______________________________________________________________________________
 // Returns the minimum value of all the elements in 'mat'
 template <class type>
-const type min2d(const matrix<type>& mat)
+const double min2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
 	// The current minimum value
-	type minVal;
+	double minVal = (double)mat(0,0);
 
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		for (size_t j = 0; j < mat.width(); ++j)
 		{
-			// The first value checked
-			if ((i == 0) && (j == 0))
-			{
-				minVal = mat(i,j);
-			}
-
 			// A new minimum has been found
-			else if (minVal > mat(i,j))
+			if (minVal > (double)mat(i,j))
 			{
-				minVal = mat(i,j);
+				minVal = (double)mat(i,j);
 			}
 		}
 	}
@@ -220,23 +208,23 @@ const type min2d(const matrix<type>& mat)
 // Returns a column matrix with the same height as 'mat' and with elements
 // corresponding to the sum of the values of the elements in the rows of 'mat'
 template <class type>
-const matrix<type> sum(const matrix<type>& mat)
+const matrix<double> sum(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
-	matrix<type> sum(mat.height(), 1);
+	matrix<double> sum(mat.height(), 1);
 
 	// The sum of all of the elements in a row
-	type rowSum = 0;
+	double rowSum = 0;
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
 
 		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// Add up the sum
-			rowSum += mat(i,j);
+			rowSum += (double)mat(i,j);
 		}
 
 		sum(i,0) = rowSum;
@@ -250,20 +238,20 @@ const matrix<type> sum(const matrix<type>& mat)
 //______________________________________________________________________________
 // Returns the average value of all the elements in 'mat'
 template <class type>
-const type sum2d(const matrix<type>& mat)
+const double sum2d(const matrix<type>& mat)
 {
 	// Checks to see that the elements are of a type that can do math
 	// (Exits the program if they can't)
 	continueIfMathType(mat);
 
 	// The sum of all of the elements in the matrix
-	type sum = 0;
+	double sum = 0;
 	for (size_t i = 0; i < mat.height(); ++i)
 	{
 		for (size_t j = 0; j < mat.width(); ++j)
 		{
 			// Add up the sum
-			sum += mat(i,j);
+			sum += (double)mat(i,j);
 		}
 	}
 
@@ -784,6 +772,6 @@ const matrix<double> rref(const matrix<type>& mat)
 	return rrefmat;
 }
 
-} // namespace matrix
+} // namespace matrixmath
 
 #endif
