@@ -8,6 +8,8 @@
 
 using namespace std;
 
+namespace matrix
+{
 
 // matrix is a 2-D array with elements of type 'type'.
 template <class type>
@@ -492,5 +494,7 @@ matrix<type>& matrix<type>::
 
 	return *this;
 }
+
+} // namespace matrix
 
 #endif

@@ -16,7 +16,7 @@ using namespace std;
 #define _MTXSAFE 1
 #define DBL_MAX 1.7976931348623158e+308 /* max value */
 
-namespace matrixmath
+namespace matrix
 {
 
 
@@ -96,6 +96,6 @@ void continueIfMathType(const matrix<type> &mat)
 	}
 }
 
-} // namespace matrixmath
+} // namespace matrix
 
 #endif

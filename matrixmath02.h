@@ -12,7 +12,7 @@
 
 using namespace std;
 
-namespace matrixmath
+namespace matrix
 {
 
 /*******************************************************************************
@@ -784,6 +784,6 @@ const matrix<double> rref(const matrix<type>& mat)
 	return rrefmat;
 }
 
-} // namespace matrixmath
+} // namespace matrix
 
 #endif
