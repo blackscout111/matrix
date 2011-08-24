@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <cfloat>
 #include <typeinfo>
 
 #include "matrix.h"
@@ -14,7 +15,6 @@ using namespace std;
 * Compiler definitions that affect the behavior of matrixmath functions
 *******************************************************************************/
 #define _MTXSAFE 1
-#define DBL_MAX 1.7976931348623158e+308 /* max value */
 
 namespace matrixmath
 {
