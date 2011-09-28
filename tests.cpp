@@ -290,6 +290,41 @@ int main()
 	printf("rref(fltMat3x3) = \n\n");
 	dispNumMat(rref(fltMat3x3));
 
+	matrix <float> fltMat4x7(4,7);
+	fltMat4x7(0,0) = 0;
+	fltMat4x7(0,1) = 0;
+	fltMat4x7(0,2) = 0;
+	fltMat4x7(0,3) = 0;
+	fltMat4x7(0,4) = 2;
+	fltMat4x7(0,5) = 8;
+	fltMat4x7(0,6) = 4;
+	fltMat4x7(1,0) = 0;
+	fltMat4x7(1,1) = 0;
+	fltMat4x7(1,2) = 0;
+	fltMat4x7(1,3) = 1;
+	fltMat4x7(1,4) = 3;
+	fltMat4x7(1,5) = 11;
+	fltMat4x7(1,6) = 9;
+	fltMat4x7(2,0) = 0;
+	fltMat4x7(2,1) = 3;
+	fltMat4x7(2,2) = -12;
+	fltMat4x7(2,3) = -3;
+	fltMat4x7(2,4) = -9;
+	fltMat4x7(2,5) = -24;
+	fltMat4x7(2,6) = -33;
+	fltMat4x7(3,0) = 0;
+	fltMat4x7(3,1) = -2;
+	fltMat4x7(3,2) = 8;
+	fltMat4x7(3,3) = 1;
+	fltMat4x7(3,4) = 6;
+	fltMat4x7(3,5) = 17;
+	fltMat4x7(3,6) = 21;
+	dispNumMat(fltMat4x7);
+	printf("ref(fltMat4x7) = \n\n");
+	dispNumMat(ref(fltMat4x7));
+	printf("rref(fltMat4x7) = \n\n");
+	dispNumMat(rref(fltMat4x7));
+
 	////////////////////////////////////////////////////////////////////////////
 
 	return 0;

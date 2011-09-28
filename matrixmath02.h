@@ -661,7 +661,6 @@ const matrix<double> ref(const matrix<type>& mat)
 	double absmax = 0, invmax = 0, val = 0;
 	while ((row < refmat.height()) && (col < refmat.width()))
 	{
-		cout << "row: " << row << " col: " << col << endl;
 		// Find the row with the highest valued element in the current column
 		maxidx = row;
 		absmax = std::abs(refmat(maxidx, col));
@@ -725,7 +724,6 @@ const matrix<double> rref(const matrix<type>& mat)
 	double absmax = 0, invmax = 0, val = 0;
 	while ((row < rrefmat.height()) && (col < rrefmat.width()))
 	{
-		cout << "row: " << row << " col: " << col << endl;
 		// Find the row with the highest valued element in the current column
 		maxidx = row;
 		absmax = std::abs(rrefmat(maxidx, col));
